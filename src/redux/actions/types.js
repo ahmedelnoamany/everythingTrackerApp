@@ -1,0 +1,1 @@
+export const TOGGLE_NEW_TIMER = 'TOGGLE_NEW_TIMER';

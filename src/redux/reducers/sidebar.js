@@ -1,3 +1,6 @@
+const initialState = {
+  newTimerToggled: false
+}
 export default function (state = initialState, action){
   if(!state){
     state = initialState;

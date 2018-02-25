@@ -11,6 +11,6 @@ export default function configureStore(initalState){
 
     )
   );
-  let store = createStore(reducer, enhancer);
+  const store = createStore(reducer, initalState, enhancer);
   return store;
 };

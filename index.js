@@ -5,18 +5,16 @@ import {
   StyleSheet
  } from 'react-native';
  import { Provider } from 'react-redux';
- import store from './src/configureStore';
+ import configureStore from './src/configureStore';
 
 import App from './App';
-
-
+const store = configureStore();
 export default everythingTrackerApp = () => (
 
   <SafeAreaView style={styles.safeArea}>
     <Provider store={store}>
       <App />
     </Provider>
-
   </SafeAreaView>
 )
 
