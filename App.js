@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -11,29 +5,39 @@ import {
   Text,
   View
 } from 'react-native';
+import styled from 'styled-components';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import MainContent from './src/components/MainContent/mainContent';
 
 type Props = {};
+
+export const MainContainer = styled.View`
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #1B9AAA;
+`;
+
+export const Header = styled.View`
+  flex: 0.1;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #F3F9D2;
+`;
+
+
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <MainContainer>
+        <Header>
+          <Text>
+            --EverythingTracker--
+          </Text>
+        </Header>
+        <MainContent />
+      </MainContainer>
     );
   }
 }
@@ -43,16 +47,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#92B4A7',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    color: '#2F2F2F'
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#2F2F2F',
     marginBottom: 5,
   },
 });
