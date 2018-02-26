@@ -23,7 +23,10 @@ class Sidebar extends Component {
               onPress={() => this.props.toggleNewTimer(true)}
               title='New Timer'
             />
-            <Text>Custom Timer</Text>
+            <Button
+              onPress={() => this.props.toggleCustomTimer(true)}
+              title='Custom Timer'
+            />
             <Text>Account</Text>
             <Text>Settings</Text>
             <Text>Help</Text>
@@ -45,6 +48,7 @@ class Sidebar extends Component {
 function bindActions(dispatch){
     return {
         toggleNewTimer: (newTimerToggled) => dispatch(sidebarActions.toggleNewTimer(newTimerToggled)),
+        toggleCustomTimer: (customTimerToggled) => dispatch(sidebarActions.toggleCustomTimer(customTimerToggled)),
     };
 }
 
