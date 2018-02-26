@@ -14,21 +14,13 @@ const SidebarContainer = styled.View`
 `;
 
 class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      newTimerToggled: false,
-      customTimerToggled: false,
-
-    };
-  }
   render(){
     return(
       <SidebarContainer>
-        {!this.state.newTimerToggled && !this.state.customTimerToggled && (
+        {!this.props.newTimerToggled && !this.props.customTimerToggled && (
           <SidebarContainer>
             <Button
-              onPress={() => this.setState({newTimerToggled: true})}
+              onPress={() => this.props.toggleNewTimer(true)}
               title='New Timer'
             />
             <Text>Custom Timer</Text>
@@ -37,11 +29,11 @@ class Sidebar extends Component {
             <Text>Help</Text>
           </SidebarContainer>
         )}
-        {this.state.newTimerToggled && (
+        {this.props.newTimerToggled && (
           <SidebarContainer>
             <NewTimer />
           </SidebarContainer>
-        ) || this.state.customTimerToggled && (
+        ) || this.props.customTimerToggled && (
           <SidebarContainer>
             <CustomTimer />
           </SidebarContainer>
@@ -58,6 +50,7 @@ function bindActions(dispatch){
 
 const mapStateToProps = state => ({
   newTimerToggled: state.sidebar.newTimerToggled,
+  customTimerToggled: state.sidebar.customTimerToggled
 });
 
 export default connect(mapStateToProps, bindActions)(Sidebar);

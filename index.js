@@ -8,7 +8,9 @@ import {
  import configureStore from './src/configureStore';
 
 import App from './App';
+
 const store = configureStore();
+
 export default everythingTrackerApp = () => (
 
   <SafeAreaView style={styles.safeArea}>
