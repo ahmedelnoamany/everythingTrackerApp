@@ -3,13 +3,38 @@ import {
   View,
   Text
 } from 'react-native';
+import { connect } from  'react-redux';
+import {
+  Content
+} from '../../styles/contentStyles';
 
-export default class TimerView extends Component {
+class TimerView extends Component {
+  displayTimers(timersArray) {
+    console.log('DISPLAY TIMERS RECIEVED: ', timersArray);
+    if(timersArray){
+      console.log('Found Timer to Display');
+      return timersArray.map((timer, index) => (
+          <View>
+            <Text>Timer</Text>
+            <Text>{timer.id}</Text>
+            <Text>{timer.type}</Text>
+          </View>
+      ));
+    }
+
+  }
   render() {
     return (
-      <View>
+      <Content>
         <Text>Timers</Text>
-      </View>
+        {this.displayTimers(this.props.savedTimers)}
+      </Content>
     )
   }
 }
+
+mapStateToProps = state => ({
+  savedTimers : state.timers.savedTimers
+})
+
+export default connect(mapStateToProps)(TimerView);
