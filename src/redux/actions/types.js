@@ -5,3 +5,4 @@ export const TOGGLE_DEFAULT_VIEW = 'TOGGLE_DEFAULT_VIEW';
 
 //timers types
 export const ADD_NEW_TIMER = 'ADD_NEW_TIMER';
+export const UPDATE_TIMER = 'UPDATE_TIMER';
