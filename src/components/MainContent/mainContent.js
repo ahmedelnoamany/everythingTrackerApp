@@ -3,42 +3,42 @@ import {
   Text,
   TouchableWithoutFeedback
 } from 'react-native';
+import {
+  MainContent,
+  Content
+} from '../../styles/contentStyles';
 import { connect } from 'react-redux';
 import { toggleDefaultView } from '../../redux/actions/sidebar';
-import styled from 'styled-components';
+
 
 import Sidebar from '../Sidebar/sidebar';
-
-const MainContent = styled.View`
-  flex: 0.9;
-  width: 100%;
-  flex-direction: row;
-`
-
-const Content = styled.View`
-  width: 100%;
-  flex: 0.9;
-  background-color: white
-`;
+import TimerView from './timerView';
 
 class MainContainer extends Component {
-  
-  renderReturn = () => {
-    return (
-      <TouchableWithoutFeedback onPress={ () => this.props.toggleDefaultView() }
-        >
-          <Content>
-            <Text style={{ width: '100%', height: '100%', backgroundColor: 'red' }}>Click to go back</Text>
-          </Content>
-      </TouchableWithoutFeedback>
-    )
+
+  renderView = () => {
+    if(this.props.newTimerToggled || this.props.customTimerToggled) {
+      return (
+        <TouchableWithoutFeedback onPress={ () => this.props.toggleDefaultView() }
+          >
+            <Content>
+              <Text style={{ width: '100%', height: '100%' }}>Click to go back</Text>
+            </Content>
+        </TouchableWithoutFeedback>
+      )
+    }
+    else {
+      return (
+          <TimerView />
+      )
+    }
+
   }
   render() {
     return (
       <MainContent>
         <Sidebar />
-        {this.renderReturn()}
-
+        { this.renderView() }
       </MainContent>
     )
   }
@@ -47,7 +47,12 @@ class MainContainer extends Component {
 function bindActions(dispatch) {
   return {
     toggleDefaultView: () => dispatch(toggleDefaultView()),
+
   }
 }
+mapStateToProps = state => ({
+  newTimerToggled: state.sidebar.newTimerToggled,
+  customTimerToggled : state.sidebar.customTimerToggled
+})
 
-export default connect(() => ({}), bindActions)(MainContainer);
+export default connect(mapStateToProps, bindActions)(MainContainer);

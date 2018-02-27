@@ -12,10 +12,6 @@ class CustomTimer extends Component {
     return (
       <View>
         <Text>Custom Timer</Text>
-        <Button
-          onPress={() => this.props.toggleCustomTimer(false)}
-          title='Back'
-        />
       </View>
     )
   }

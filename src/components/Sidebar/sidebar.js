@@ -4,14 +4,14 @@ import {
   Text,
   Button
 } from 'react-native';
-import styled from 'styled-components';
+import {
+  SidebarContainer
+} from '../../styles/sidebarStyles';
 import * as sidebarActions from '../../redux/actions/sidebar';
+
 import NewTimer from './newTimer';
 import CustomTimer from './customTimer';
-const SidebarContainer = styled.View`
-  flex: 0.3;
-  background-color: #F3F9D2;
-`;
+
 
 class Sidebar extends Component {
   render(){
