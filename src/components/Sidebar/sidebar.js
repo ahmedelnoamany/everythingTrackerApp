@@ -5,7 +5,8 @@ import {
   Button
 } from 'react-native';
 import {
-  SidebarContainer
+  SidebarContainer,
+  SidebarContent
 } from '../../styles/sidebarStyles';
 import * as sidebarActions from '../../redux/actions/sidebar';
 
@@ -20,32 +21,34 @@ class Sidebar extends Component {
     return(
       <SidebarContainer>
         {!this.props.newTimerToggled && !this.props.customTimerToggled && !this.props.updateTimerToggled && (
-          <SidebarContainer>
+          <SidebarContent>
             <Button
+              color='#BCC8E5'
               onPress={() => this.props.toggleNewTimer(true)}
               title='New Timer'
             />
             <Button
+              color='#BCC8E5'
               onPress={() => this.props.toggleCustomTimer(true)}
               title='Custom Timer'
             />
-            <Text>Account</Text>
-            <Text>Settings</Text>
-            <Text>Help</Text>
-          </SidebarContainer>
+            <Text style={{color: '#BCC8E5'}}>Account</Text>
+            <Text style={{color: '#BCC8E5'}}>Settings</Text>
+            <Text style={{color: '#BCC8E5'}}>Help</Text>
+          </SidebarContent>
         )}
         {this.props.newTimerToggled && (
-          <SidebarContainer>
+          <SidebarContent>
             <NewTimer />
-          </SidebarContainer>
+          </SidebarContent>
         ) || this.props.customTimerToggled && (
-          <SidebarContainer>
+          <SidebarContent>
             <CustomTimer />
-          </SidebarContainer>
+          </SidebarContent>
         ) || this.props.updateTimerToggled && (
-          <SidebarContainer>
+          <SidebarContent>
             <UpdateTimer />
-          </SidebarContainer>
+          </SidebarContent>
         )}
       </SidebarContainer>
     )

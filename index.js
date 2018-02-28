@@ -23,7 +23,7 @@ export default everythingTrackerApp = () => (
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#F3F9D2'
+    backgroundColor: '#4D66A0'
   }
 })
 

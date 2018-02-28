@@ -48,7 +48,7 @@ class TimerView extends Component {
     console.log('saved in state: ', this.state.currentTimer);
     return (
       <Content>
-        <Text>Timers</Text>
+        <Text style={{color: '#27324C'}}>Timers</Text>
         {!this.state.updateTimer && this.displayTimers(this.props.savedTimers)}
       </Content>
     )

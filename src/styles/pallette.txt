@@ -1,0 +1,5 @@
+//Darkest blue = 011035
+//Darker blue = 27324C
+//Normal blue = 4D66A0
+//Lighter blue = 94A6D1
+//Lightest blue = BCC8E5
