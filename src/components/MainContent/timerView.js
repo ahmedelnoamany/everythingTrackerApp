@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { connect } from  'react-redux';
 import { updateTimer } from '../../redux/actions/timers';
+import { toggleUpdateTimer } from '../../redux/actions/sidebar';
 import {
   Content
 } from '../../styles/contentStyles';
@@ -14,7 +15,8 @@ class TimerView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      updateTimer : false
+      updateTimer : false,
+      currentTimer: {}
     }
   }
   displayTimers(timersArray) {
@@ -31,27 +33,19 @@ class TimerView extends Component {
     return (
       <View>
         <View>
-          <Text>{timer.id}</Text>
+          <Text>{timer.name}</Text>
         </View>
         <View>
           <Button
-            title='Rename'
-            onPress={() => this.updateTimer(timer)}
+            title='Modify'
+            onPress={() => this.props.toggleUpdateTimer(true)}
           />
         </View>
       </View>
     )
   }
-  updateTimer(timer) {
-    this.setState({updateTimer : true});
-    console.log('In update timer, ', this.state.updateTimer);
-    return (
-      <View>
-        <Text>Update Timer!</Text>
-      </View>
-    )
-  }
   render() {
+    console.log('saved in state: ', this.state.currentTimer);
     return (
       <Content>
         <Text>Timers</Text>
@@ -62,7 +56,7 @@ class TimerView extends Component {
 }
 function bindActions(dispatch) {
   return {
-    updateTimer : (updatedTimer) => dispatch(updateTimer(updatedTimer))
+    toggleUpdateTimer: (updateTimerToggled) => dispatch(toggleUpdateTimer(updateTimerToggled))
   }
 }
 mapStateToProps = state => ({

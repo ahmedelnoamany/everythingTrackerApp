@@ -1,6 +1,7 @@
 const initialState = {
   newTimerToggled: false,
-  customTimerToggled: false
+  customTimerToggled: false,
+  updateTimerToggled: false
 }
 export default function (state = initialState, action){
   if(!state){
@@ -22,11 +23,19 @@ export default function (state = initialState, action){
       }
     }
     case 'TOGGLE_DEFAULT_VIEW': {
-      console.log('IN REDUCER');
+      console.log('In Reducer, Action is TOGGLE_DEFAULT_VIEW: ', action);
       return {
         ...state,
         newTimerToggled: false,
-        customTimerToggled: false
+        customTimerToggled: false,
+        updateTimerToggled: false
+      }
+    }
+    case 'TOGGLE_UPDATE_TIMER': {
+      console.log('In Reducer, Action is TOGGLE_UPDATE_TIMER: ', action);
+      return {
+      ...state,
+      updateTimerToggled: action.payload
       }
     }
     default:

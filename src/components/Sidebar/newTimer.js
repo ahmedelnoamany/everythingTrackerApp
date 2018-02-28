@@ -11,9 +11,10 @@ import {
 } from 'react-native';
 
 class NewTimer extends Component {
-  addNewTimer(id, type, stepSize) {
+  addNewTimer(id, name, type, stepSize) {
     let newTimerObject = {
       'id' : id,
+      'name': name,
       'type' : type,
       'increment' : stepSize
     }
@@ -26,7 +27,7 @@ class NewTimer extends Component {
         <Text>New Timer</Text>
         <Button
           title='New Incremenet Timer'
-          onPress= {() => this.addNewTimer('testTimer1', 'increment', 1)}
+          onPress= {() => this.addNewTimer('testTimer1', 'Test Timer 1','increment', 1)}
         />
       </View>
     )

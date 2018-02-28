@@ -17,7 +17,7 @@ import TimerView from './timerView';
 class MainContainer extends Component {
 
   renderView = () => {
-    if(this.props.newTimerToggled || this.props.customTimerToggled) {
+    if(this.props.newTimerToggled || this.props.customTimerToggled || this.props.updateTimerToggled) {
       return (
         <TouchableWithoutFeedback onPress={ () => this.props.toggleDefaultView() }
           >
@@ -52,7 +52,8 @@ function bindActions(dispatch) {
 }
 mapStateToProps = state => ({
   newTimerToggled: state.sidebar.newTimerToggled,
-  customTimerToggled : state.sidebar.customTimerToggled
+  customTimerToggled : state.sidebar.customTimerToggled,
+  updateTimerToggled : state.sidebar.updateTimerToggled
 })
 
 export default connect(mapStateToProps, bindActions)(MainContainer);
