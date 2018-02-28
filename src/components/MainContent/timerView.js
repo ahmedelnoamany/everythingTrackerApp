@@ -38,7 +38,7 @@ class TimerView extends Component {
         <View>
           <Button
             title='Modify'
-            onPress={() => this.props.toggleUpdateTimer(true)}
+            onPress={() => this.props.toggleUpdateTimer(true, timer)}
           />
         </View>
       </View>
@@ -56,7 +56,7 @@ class TimerView extends Component {
 }
 function bindActions(dispatch) {
   return {
-    toggleUpdateTimer: (updateTimerToggled) => dispatch(toggleUpdateTimer(updateTimerToggled))
+    toggleUpdateTimer: (updateTimerToggled, selectedTimer) => dispatch(toggleUpdateTimer(updateTimerToggled, selectedTimer))
   }
 }
 mapStateToProps = state => ({

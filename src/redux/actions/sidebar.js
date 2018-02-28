@@ -26,9 +26,9 @@ export const toggleDefaultView = () => {
   };
 };
 
-export const toggleUpdateTimer = (updateTimerToggled) => {
+export const toggleUpdateTimer = (updateTimerToggled, selectedTimer) => {
   return {
     type: TOGGLE_UPDATE_TIMER,
-    payload: updateTimerToggled
+    payload: {updateTimerToggled, selectedTimer}
   };
 };

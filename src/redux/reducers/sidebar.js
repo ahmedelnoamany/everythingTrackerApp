@@ -1,7 +1,8 @@
 const initialState = {
   newTimerToggled: false,
   customTimerToggled: false,
-  updateTimerToggled: false
+  updateTimerToggled: false,
+  selectedTimer: {}
 }
 export default function (state = initialState, action){
   if(!state){
@@ -35,7 +36,8 @@ export default function (state = initialState, action){
       console.log('In Reducer, Action is TOGGLE_UPDATE_TIMER: ', action);
       return {
       ...state,
-      updateTimerToggled: action.payload
+      updateTimerToggled: action.payload.updateTimerToggled,
+      selectedTimer: action.payload.selectedTimer
       }
     }
     default:
