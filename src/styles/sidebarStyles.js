@@ -32,7 +32,7 @@ export const SidebarButton = styled.TouchableOpacity`
   background-color: #BCC8E5;
   border: 2px solid #011035;
   align-items: center;
-  border-radius: 25px;
+  border-radius: 22px;
 `;
 
 export const ButtonTextStyle = styled.Text`

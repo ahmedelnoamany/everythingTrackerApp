@@ -5,10 +5,11 @@ import {
   addNewTimer
 } from '../../redux/actions/timers';
 import {
-  Text,
-  View,
-  Button
-} from 'react-native';
+  SidebarContent,
+  SidebarUpper,
+  SidebarButton,
+  ButtonTextStyle
+} from '../../styles/sidebarStyles';
 
 class NewTimer extends Component {
   addNewTimer(id, name, type, stepSize) {
@@ -19,17 +20,19 @@ class NewTimer extends Component {
       'increment' : stepSize
     }
     this.props.addNewTimer(newTimerObject);
-
+    this.props.toggleNewTimer(false);
   }
   render() {
     return (
-      <View>
-        <Text>New Timer</Text>
-        <Button
-          title='New Incremenet Timer'
-          onPress= {() => this.addNewTimer('testTimer1', 'Test Timer 1','increment', 1)}
-        />
-      </View>
+      <SidebarContent>
+        <SidebarUpper>
+          <SidebarButton
+            onPress= {() => this.addNewTimer('testTimer1', 'Test Timer 1','increment', 1)}
+          >
+            <ButtonTextStyle>Increment Timer</ButtonTextStyle>
+          </SidebarButton>
+        </SidebarUpper>
+      </SidebarContent>
     )
   }
 }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  Button
+  Button,
+  Image
 } from 'react-native';
 import { connect } from  'react-redux';
 import { updateTimer } from '../../redux/actions/timers';
@@ -10,6 +11,13 @@ import { toggleUpdateTimer } from '../../redux/actions/sidebar';
 import {
   Content
 } from '../../styles/contentStyles';
+import {
+  TrackersContainer,
+  TrackerContainer,
+  TrackerLeftContainer,
+  TrackerRightContainer,
+  TrackerCenterContainer
+} from '../../styles/trackerViewStyles';
 
 class TimerView extends Component {
   constructor(props) {
@@ -31,26 +39,34 @@ class TimerView extends Component {
   }
   buildTimer(timer){
     return (
-      <View>
-        <View>
+      <TrackerContainer>
+        <View style={{flex: 0.7, alignItems: 'center', backgroundColor: 'white'}}>
           <Text>{timer.name}</Text>
+          <Text>{timer.increment}</Text>
         </View>
-        <View>
+        <View style={{flex: 0.15, backgroundColor: 'red'}}>
+          <Button
+            title='+'
+          />
+        </View>
+        <View style={{flex: 0.15, backgroundColor: 'red'}}>
+          <Image
+            source={require('../../assets/icons8-wrench-filled-50.png')}
+          />
           <Button
             title='Modify'
             onPress={() => this.props.toggleUpdateTimer(true, timer)}
           />
         </View>
-      </View>
+      </TrackerContainer>
     )
   }
   render() {
     console.log('saved in state: ', this.state.currentTimer);
     return (
-      <Content>
-        <Text style={{color: '#27324C'}}>Timers</Text>
+      <TrackersContainer>
         {!this.state.updateTimer && this.displayTimers(this.props.savedTimers)}
-      </Content>
+      </TrackersContainer>
     )
   }
 }
