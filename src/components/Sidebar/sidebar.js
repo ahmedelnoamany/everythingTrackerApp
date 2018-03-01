@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Text,
-  Button
+  TouchableOpacity
 } from 'react-native';
 import {
   SidebarContainer,
-  SidebarContent
+  SidebarContent,
+  SidebarButton,
+  ButtonTextStyle,
+  SidebarUpper,
+  SidebarLower
 } from '../../styles/sidebarStyles';
 import * as sidebarActions from '../../redux/actions/sidebar';
-
+import {
+  View
+} from 'react-native';
 import NewTimer from './newTimer';
 import CustomTimer from './customTimer';
 import UpdateTimer from './updateTimer';
@@ -22,19 +28,25 @@ class Sidebar extends Component {
       <SidebarContainer>
         {!this.props.newTimerToggled && !this.props.customTimerToggled && !this.props.updateTimerToggled && (
           <SidebarContent>
-            <Button
-              color='#BCC8E5'
-              onPress={() => this.props.toggleNewTimer(true)}
-              title='New Timer'
-            />
-            <Button
-              color='#BCC8E5'
-              onPress={() => this.props.toggleCustomTimer(true)}
-              title='Custom Timer'
-            />
-            <Text style={{color: '#BCC8E5'}}>Account</Text>
-            <Text style={{color: '#BCC8E5'}}>Settings</Text>
-            <Text style={{color: '#BCC8E5'}}>Help</Text>
+            <SidebarUpper>
+              <SidebarButton
+                color='#BCC8E5'
+                onPress={() => this.props.toggleNewTimer(true)}
+              >
+                <ButtonTextStyle>New Tracker</ButtonTextStyle>
+              </SidebarButton>
+              <SidebarButton
+                color='#BCC8E5'
+                onPress={() => this.props.toggleCustomTimer(true)}
+              >
+                <ButtonTextStyle>Custom Tracker</ButtonTextStyle>
+              </SidebarButton>
+            </SidebarUpper>
+            <SidebarLower>
+              <Text style={{color: '#BCC8E5'}}>Account</Text>
+              <Text style={{color: '#BCC8E5'}}>Settings</Text>
+              <Text style={{color: '#BCC8E5'}}>Help</Text>
+            </SidebarLower>
           </SidebarContent>
         )}
         {this.props.newTimerToggled && (
