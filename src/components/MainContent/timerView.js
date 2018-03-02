@@ -18,7 +18,7 @@ import {
   TrackerRightContainer,
   TrackerCenterContainer
 } from '../../styles/trackerViewStyles';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 class TimerView extends Component {
   constructor(props) {
     super(props);
@@ -40,23 +40,22 @@ class TimerView extends Component {
   buildTimer(timer){
     return (
       <TrackerContainer>
-        <View style={{flex: 0.7, alignItems: 'center', backgroundColor: 'white'}}>
+        <View style={{flex: 0.5, alignItems: 'center', backgroundColor: 'white'}}>
           <Text>{timer.name}</Text>
           <Text>{timer.increment}</Text>
         </View>
-        <View style={{flex: 0.15, backgroundColor: 'red'}}>
+        <View style={{flex: 0.25, backgroundColor: 'red'}}>
           <Button
             title='+'
           />
         </View>
-        <View style={{flex: 0.15, backgroundColor: 'red'}}>
-          <Image
-            source={require('../../assets/icons8-wrench-filled-50.png')}
-          />
-          <Button
-            title='Modify'
+        <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
+          <Icon.Button
+            name='wrench'
             onPress={() => this.props.toggleUpdateTimer(true, timer)}
-          />
+            size={15}
+            >
+            </Icon.Button>
         </View>
       </TrackerContainer>
     )
