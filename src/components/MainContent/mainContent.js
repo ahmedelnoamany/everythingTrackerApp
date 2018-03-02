@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   Text,
-  TouchableWithoutFeedback
+  TouchableHighlight,
+  View
 } from 'react-native';
 import {
   MainContent,
@@ -16,24 +17,22 @@ import TimerView from './timerView';
 
 class MainContainer extends Component {
 
-  renderView = () => {
-    if(this.props.newTimerToggled || this.props.customTimerToggled || this.props.updateTimerToggled) {
-      return (
-        <TouchableWithoutFeedback onPress={ () => this.props.toggleDefaultView() }
-          >
-            <Content>
-              <Text style={{ width: '100%', height: '100%' }}>Click to go back</Text>
-            </Content>
-        </TouchableWithoutFeedback>
-      )
-    }
-    else {
-      return (
-          <TimerView />
-      )
-    }
+  renderView = () => (
 
-  }
+      <Content>
+        {(this.props.newTimerToggled || this.props.customTimerToggled || this.props.updateTimerToggled) &&(
+      <TouchableHighlight
+        onPress={ () => this.props.toggleDefaultView() }
+        style={{flex: 0.7, position: 'absolute', zIndex: 1000, backgroundColor: 'rgba(0,0,0,0.6)', height: '100%', width: '100%', alignItems:'center', justifyContent: 'center'}}
+        activeOpacity= {0.2}
+        underlayColor="rgba(0, 0, 0, 0)"
+        >
+          <Text style={{ color:'white' }}>Click to go back</Text>
+        </TouchableHighlight>)}
+          <TimerView />
+    </Content>
+
+  )
   render() {
     return (
       <MainContent>

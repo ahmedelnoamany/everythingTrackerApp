@@ -18,7 +18,7 @@ class UpdateTimer extends Component {
   buildUpdatedTimer = () => {
     var currentTimer = this.props.currentSelectedTimer;
     currentTimer.name = this.state.name;
-    console.log('UpdatedTimer is : ', currentTimer);
+    this.props.updateTimer(currentTimer);
   }
   render() {
     return (

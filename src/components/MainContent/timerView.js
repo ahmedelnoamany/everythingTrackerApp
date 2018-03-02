@@ -45,21 +45,21 @@ class TimerView extends Component {
   }
   buildTimer(timer){
     return (
-      <Swipeout right={
-        [
+      <Swipeout
+        right={[
           {
             component: <Icon.Button
               name='wrench'
               onPress={() => this.props.toggleUpdateTimer(true, timer)}
               borderRadius={0}
               iconStyle={{marginRight: 0}}
-              style={{ width: '100%', height:'100%', justifyContent: 'center', borderbottomwidth: '1px'}}
+              style={{ width: '100%', height:'100%', justifyContent: 'center', borderBottomWidth: 2, borderLeftWidth: 2}}
               backgroundColor='#4D66A0'
               >
               </Icon.Button>
           }
-        ]
-      }>
+        ]}
+        >
         <TrackerContainer>
           <TrackerLeftContainer>
             <Text>{timer.name}</Text>
@@ -85,7 +85,7 @@ class TimerView extends Component {
     console.log('saved in state: ', this.state.currentTimer);
     return (
       <TrackersContainer>
-        {!this.state.updateTimer && this.displayTimers(this.props.savedTimers)}
+        {this.displayTimers(this.props.savedTimers)}
       </TrackersContainer>
     )
   }

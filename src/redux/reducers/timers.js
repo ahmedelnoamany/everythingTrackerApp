@@ -18,12 +18,19 @@ export default function(state = initialState, action) {
     }
     case 'UPDATE_TIMER': {
       var savedTimersArray = state.savedTimers.slice();
-      var currentTimer = savedTimersArray.filter((timer, index) => (
-         timer.id === action.payload.id
-      ));
-      console.log('The timer to be updated was found : ', currentTimer)
+      var currentTimerPos = null;
+      var currentTimer = savedTimersArray.map((timer, index) => {
+         if(timer.id === action.payload.id){
+           currentTimerPos = index;
+           return timer;
+         }
+      });
+      currentTimer = action.payload;
+      savedTimersArray[currentTimerPos] = currentTimer;
+      console.log('The timer to be updated was found : ', currentTimer, currentTimerPos)
       return {
-        ...state
+        ...state,
+        savedTimers : savedTimersArray
       }
     }
     default :
