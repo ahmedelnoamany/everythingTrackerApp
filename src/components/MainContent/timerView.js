@@ -19,6 +19,12 @@ import {
   TrackerCenterContainer
 } from '../../styles/trackerViewStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Swipeout from 'react-native-swipeout';
+const swipeButtons = [
+  {
+    text:'button'
+  }
+]
 class TimerView extends Component {
   constructor(props) {
     super(props);
@@ -39,25 +45,40 @@ class TimerView extends Component {
   }
   buildTimer(timer){
     return (
-      <TrackerContainer>
-        <View style={{flex: 0.5, alignItems: 'center', backgroundColor: 'white'}}>
-          <Text>{timer.name}</Text>
-          <Text>{timer.increment}</Text>
-        </View>
-        <View style={{flex: 0.25, backgroundColor: 'red'}}>
-          <Button
-            title='+'
-          />
-        </View>
-        <View style={{flex: 0.25, alignItems: 'center', justifyContent: 'center'}}>
-          <Icon.Button
-            name='wrench'
-            onPress={() => this.props.toggleUpdateTimer(true, timer)}
-            size={15}
-            >
-            </Icon.Button>
-        </View>
-      </TrackerContainer>
+      <Swipeout right={
+        [
+          {
+            component: <Icon.Button
+              name='wrench'
+              onPress={() => this.props.toggleUpdateTimer(true, timer)}
+              borderRadius={0}
+              iconStyle={{marginRight: 0}}
+              style={{ width: '100%', height:'100%', justifyContent: 'center', borderbottomwidth: '1px'}}
+              backgroundColor='#4D66A0'
+              >
+              </Icon.Button>
+          }
+        ]
+      }>
+        <TrackerContainer>
+          <TrackerLeftContainer>
+            <Text>{timer.name}</Text>
+            <Text>{timer.increment}</Text>
+          </TrackerLeftContainer>
+          <TrackerRightContainer>
+            <Icon.Button
+              name='plus-circle'
+              onPress={() => this.props.toggleUpdateTimer(true, timer)}
+              borderRadius={0}
+              iconStyle={{ marginRight: 0 }}
+              style={{ width: '100%', justifyContent: 'center'}}
+              backgroundColor='#4D66A0'
+              >
+              </Icon.Button>
+          </TrackerRightContainer>
+        </TrackerContainer>
+      </Swipeout>
+
     )
   }
   render() {
