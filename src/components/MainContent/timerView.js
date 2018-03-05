@@ -5,7 +5,8 @@ import {
   Button,
   Image,
   ScrollView,
-  Alert
+  Alert,
+  TouchableHighlight
 } from 'react-native';
 import { connect } from  'react-redux';
 import { updateTimer, incrementTimer, deleteTimer } from '../../redux/actions/timers';
@@ -31,6 +32,8 @@ class TimerView extends Component {
       updateTimer : false,
       currentTimer: {},
       swipeView: false,
+      trackersObject: {},
+      order: []
     }
   }
   componentWillReceiveProps(props) {
@@ -38,6 +41,7 @@ class TimerView extends Component {
     if(props.updateTimerToggled === true){
       this.closeSwipeView(true)
     }
+    this.prepareScrollView(props);
   }
   closeSwipeView(close) {
     if(close){
@@ -122,14 +126,46 @@ class TimerView extends Component {
 
     )
   }
+  prepareScrollView(props) {
+    console.log('PREPARING... ');
+    console.log(props.savedTimers);
+    console.log(props.savedTimers)
+    let trackerObj = {};
+    let timers = props.savedTimers;
+    for(var i = 0; i< timers.length; i++){
+      console.log('Timer Found...')
+      trackerObj[i] = timers[i];
+    }
+    let order = Object.keys(trackerObj);
+    this.setState({trackersObject: trackerObj, order})
+  }
   render() {
-    console.log('saved in state: ', this.state.currentTimer);
+    console.log('saved in state: ', this.state);
     return (
-      <TrackersContainer>
-        <ScrollView style={{height: '100%'}}>
-          {this.displayTimers(this.props.savedTimers)}
-        </ScrollView>
-      </TrackersContainer>
+        <SortableListView
+        style={{ flex: 1 }}
+        data={this.state.trackersObject}
+        order={this.state.order}
+        onRowMoved={e => {
+          let { order } = this.state;
+          console.log(e);
+          order.splice(e.to, 0, order.splice(e.from, 1)[0])
+          this.setState({ order })
+        }}
+        renderRow={row => <TouchableHighlight
+        underlayColor={'#eee'}
+        style={{
+          padding: 25,
+          backgroundColor: '#F8F8F8',
+          borderBottomWidth: 1,
+          borderColor: '#eee',
+        }}
+        {...this.props.sortHandlers}
+      >
+        <Text>{row.id}</Text>
+      </TouchableHighlight>}
+        disableAnimatedScrolling={true}
+      />
     )
   }
 }
