@@ -7,21 +7,20 @@ import styled from 'styled-components';
 
 export const SidebarContainer = styled.View`
   flex: 0.3;
-  background-color: #4D66A0;
+  background-color: #93B4D8;
   border-right-width: 2px;
-  border-color: #011035;
-
+  border-color: #50565B;
 `;
 
 export const SidebarContent = styled.View`
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
 `;
 export const SidebarUpper = styled.View`
   flex: 0.5;
-  padding: 5px;
-  justify-content: space-between;
+  margin-top: 20%;
+  border-top-width: 2px;
+  border-color: #50565B;
 `;
 export const SidebarLower = styled.View`
   justify-content: flex-end;
@@ -29,13 +28,16 @@ export const SidebarLower = styled.View`
   flex: 0.5;
 `;
 export const SidebarButton = styled.TouchableOpacity`
-  background-color: #BCC8E5;
-  border: 2px solid #011035;
+  border-color: #50565B;
+  border-bottom-width: 2px;
   align-items: center;
-  border-radius: 22px;
+  height: 15%;
+  padding: 2px;
+  justify-content: center;
 `;
 
 export const ButtonTextStyle = styled.Text`
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
+  color: #343A3F;
 `

@@ -12,24 +12,38 @@ import {
 } from '../../styles/sidebarStyles';
 
 class NewTimer extends Component {
-  addNewTimer(id, name, type, stepSize) {
+  constructor(props){
+    super(props);
+    this.state = {
+      currentID: 0
+    }
+  };
+  componentDidMount() {
+    console.log('COMPONENT MOUNTING')
+  }
+  addNewTimer = (name, type, stepSize) =>{
+    let newID = 1;
     let newTimerObject = {
-      'id' : id,
+      'id' : newID,
       'name': name,
       'type' : type,
-      'increment' : stepSize
+      'increment' : stepSize,
+      'value' : 0
     }
     this.props.addNewTimer(newTimerObject);
     this.props.toggleNewTimer(false);
+    this.setState({ currentID: newID });
+
   }
   render() {
+    console.log(this.state.currentID);
     return (
       <SidebarContent>
         <SidebarUpper>
           <SidebarButton
-            onPress= {() => this.addNewTimer('testTimer1', 'Test Timer 1','increment', 1)}
+            onPress= {() => this.addNewTimer('Test Timer 1','increment', 1)}
           >
-            <ButtonTextStyle>Increment Timer</ButtonTextStyle>
+            <ButtonTextStyle>Increment Tracker</ButtonTextStyle>
           </SidebarButton>
         </SidebarUpper>
       </SidebarContent>

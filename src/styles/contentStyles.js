@@ -9,6 +9,6 @@ export const MainContent = styled.View`
 export const Content = styled.View`
   width: 100%;
   flex: 0.7;
-  border-color: #011035;
+  border-color: #50565B;
   border-top-width: 2px;
 `;

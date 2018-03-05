@@ -4,23 +4,22 @@ import {
   ScrollView
 } from 'react-native';
 
-export const TrackersContainer = styled.ScrollView`
-  flex: 0.7;
-  border-top-width: 3px;
-  border-color: #011035;
+export const TrackersContainer = styled.View`
+  border-top-width: 1px;
+  border-color: #50565B;
 `;
-export const TrackerContainer = styled.View`
-  flex-direction: row;
-  width: 100%;
+
+export const TrackerContainer = styled.ScrollView`
   border-bottom-width: 2px;
-  border-color: black;
+  border-color: #50565B;
 `;
 
 export const TrackerLeftContainer = styled.View`
   flex: 0.75;
   align-items: center;
-  background-color: white;
+  background-color: #BCC8E5;
   border-right-width: 1px;
+  border-color: #50565B;
 
 `;
 
@@ -29,10 +28,10 @@ export const TrackerCenterContainer = styled.View`
   align-items: center;
   justify-content: center;
   border-right-width: 1px;
-  width: 100%;
 `;
 export const TrackerRightContainer = styled.View`
   flex: 0.25;
+  flex-direction: column;
   ${'' /* align-items: center; */}
   ${'' /* justify-content: center; */}
 `;

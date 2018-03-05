@@ -19,7 +19,7 @@ export default class App extends Component<Props> {
     return (
       <MainContainer>
         <Header>
-          <Text style={{color: '#BCC8E5'}}>
+          <Text style={{color: '#343A3F'}}>
             --EverythingTracker--
           </Text>
         </Header>

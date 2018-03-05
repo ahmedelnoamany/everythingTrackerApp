@@ -3,7 +3,8 @@ import {
   View,
   Text,
   Button,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
 import { connect } from  'react-redux';
 import { updateTimer } from '../../redux/actions/timers';
@@ -20,11 +21,7 @@ import {
 } from '../../styles/trackerViewStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Swipeout from 'react-native-swipeout';
-const swipeButtons = [
-  {
-    text:'button'
-  }
-]
+
 class TimerView extends Component {
   constructor(props) {
     super(props);
@@ -46,6 +43,8 @@ class TimerView extends Component {
   buildTimer(timer){
     return (
       <Swipeout
+        autoClose={true}
+        close={this.props.updateTimerToggled}
         right={[
           {
             component: <Icon.Button
@@ -53,7 +52,7 @@ class TimerView extends Component {
               onPress={() => this.props.toggleUpdateTimer(true, timer)}
               borderRadius={0}
               iconStyle={{marginRight: 0}}
-              style={{ width: '100%', height:'100%', justifyContent: 'center', borderBottomWidth: 2, borderLeftWidth: 2}}
+              style={{ backgroundColor: '#343A3F', width: '100%', height:'100%', justifyContent: 'center', borderColor: '#50565B', borderBottomWidth: 2, borderLeftWidth: 2}}
               backgroundColor='#4D66A0'
               >
               </Icon.Button>
@@ -61,21 +60,24 @@ class TimerView extends Component {
         ]}
         >
         <TrackerContainer>
-          <TrackerLeftContainer>
-            <Text>{timer.name}</Text>
-            <Text>{timer.increment}</Text>
-          </TrackerLeftContainer>
-          <TrackerRightContainer>
-            <Icon.Button
-              name='plus-circle'
-              onPress={() => this.props.toggleUpdateTimer(true, timer)}
-              borderRadius={0}
-              iconStyle={{ marginRight: 0 }}
-              style={{ width: '100%', justifyContent: 'center'}}
-              backgroundColor='#4D66A0'
-              >
-              </Icon.Button>
-          </TrackerRightContainer>
+          <View style={{flexDirection: 'row'}}>
+            <TrackerLeftContainer>
+              <Text>{timer.name}</Text>
+              <Text style={{fontSize: 10}}>Do Something: {timer.id} Goal Achieved: 0%</Text>
+            </TrackerLeftContainer>
+            <TrackerRightContainer>
+              <Icon.Button
+                name='plus-circle'
+                onPress={() => this.props.toggleUpdateTimer(true, timer)}
+                borderRadius={0}
+                iconStyle={{ marginRight: 0 }}
+                style={{backgroundColor: '#343A3F', height: '100%',justifyContent: 'center'}}
+                backgroundColor='#4D66A0'
+                >
+                </Icon.Button>
+            </TrackerRightContainer>
+          </View>
+
         </TrackerContainer>
       </Swipeout>
 
@@ -85,7 +87,9 @@ class TimerView extends Component {
     console.log('saved in state: ', this.state.currentTimer);
     return (
       <TrackersContainer>
-        {this.displayTimers(this.props.savedTimers)}
+        <ScrollView style={{height: '100%'}}>
+          {this.displayTimers(this.props.savedTimers)}
+        </ScrollView>
       </TrackersContainer>
     )
   }
@@ -96,7 +100,8 @@ function bindActions(dispatch) {
   }
 }
 mapStateToProps = state => ({
-  savedTimers : state.timers.savedTimers
+  savedTimers : state.timers.savedTimers,
+  updateTimerToggled : state.sidebar.updateTimerToggled
 })
 
 export default connect(mapStateToProps, bindActions)(TimerView);

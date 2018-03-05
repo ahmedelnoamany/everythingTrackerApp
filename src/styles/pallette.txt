@@ -3,3 +3,11 @@
 //Normal blue = 4D66A0
 //Lighter blue = 94A6D1
 //Lightest blue = BCC8E5
+
+
+
+//Blue White = DCEDFF
+//Light Blue = 93B4D8
+//Light Grey = 8F99A3
+//Medium Grey = 50565B
+//Dark Grey = 343A3F
