@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { updateTimer } from '../../redux/actions/timers';
+import { toggleUpdateTimer } from '../../redux/actions/sidebar';
 
 class UpdateTimer extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class UpdateTimer extends Component {
     }
   }
   buildUpdatedTimer = () => {
+    this.props.toggleUpdateTimer(false);
     var currentTimer = this.props.currentSelectedTimer;
     currentTimer.name = this.state.name;
     this.props.updateTimer(currentTimer);
@@ -39,6 +41,7 @@ class UpdateTimer extends Component {
 function bindActions(dispatch) {
   return {
     updateTimer: (updatedTimer) => dispatch(updateTimer(updatedTimer)),
+    toggleUpdateTimer: () => dispatch(toggleUpdateTimer())
   }
 }
 

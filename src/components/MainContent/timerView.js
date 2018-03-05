@@ -22,6 +22,7 @@ import {
 } from '../../styles/trackerViewStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Swipeout from 'react-native-swipeout';
+import SortableListView from 'react-native-sortable-listview';
 
 class TimerView extends Component {
   constructor(props) {
