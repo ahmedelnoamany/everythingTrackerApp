@@ -1,5 +1,6 @@
 const initialState = {
   savedTimers : [],
+  currentTimerID: 0
 }
 export default function(state = initialState, action) {
   if(!state) {
@@ -8,21 +9,32 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case 'ADD_NEW_TIMER': {
       console.log('IN ADD NEW TIMER');
+      var currentTimerID = state.currentTimerID;
+      currentTimerID++;
+      action.payload.id = currentTimerID;
       var updatedSavedTimersArray = state.savedTimers.slice();
       updatedSavedTimersArray.push(action.payload);
       console.log('NEW RESULTS: ', updatedSavedTimersArray);
       return {
         ...state,
-        savedTimers : updatedSavedTimersArray
+        savedTimers : updatedSavedTimersArray,
+        currentTimerID: currentTimerID
       }
     }
     case 'UPDATE_TIMER': {
       var savedTimersArray = state.savedTimers.slice();
       var currentTimerPos = null;
+      console.log('SAVED TIMERS: ', savedTimersArray);
+      console.log('CURRENT TIMER TO UPDATE ID: ', action.payload.id);
       var currentTimer = savedTimersArray.map((timer, index) => {
+          console.log('IN MAP')
          if(timer.id === action.payload.id){
            currentTimerPos = index;
+           console.log('POSITION TO UPDATE: ', currentTimerPos)
            return timer;
+         }
+         else {
+           console.log('NOTHING FOUND');
          }
       });
       currentTimer = action.payload;
@@ -31,6 +43,20 @@ export default function(state = initialState, action) {
       return {
         ...state,
         savedTimers : savedTimersArray
+      }
+    }
+    case 'DELETE_TIMER': {
+      var savedTimersArray = state.savedTimers.slice();
+      console.log('TIMERS BEFORE DELETE: ', savedTimersArray);
+      savedTimersArray.map((timer, index) => {
+        if(timer.id === action.payload){
+          savedTimersArray.splice(index, 1);
+        }
+      })
+
+      return {
+        ...state,
+        savedTimers: savedTimersArray
       }
     }
     default :

@@ -12,19 +12,12 @@ import {
 } from '../../styles/sidebarStyles';
 
 class NewTimer extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      currentID: 0
-    }
-  };
   componentDidMount() {
     console.log('COMPONENT MOUNTING')
   }
   addNewTimer = (name, type, stepSize) =>{
-    let newID = 1;
     let newTimerObject = {
-      'id' : newID,
+      'id' : 0,
       'name': name,
       'type' : type,
       'increment' : stepSize,
@@ -32,11 +25,8 @@ class NewTimer extends Component {
     }
     this.props.addNewTimer(newTimerObject);
     this.props.toggleNewTimer(false);
-    this.setState({ currentID: newID });
-
   }
   render() {
-    console.log(this.state.currentID);
     return (
       <SidebarContent>
         <SidebarUpper>

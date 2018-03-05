@@ -15,7 +15,7 @@ export const TrackerContainer = styled.ScrollView`
 `;
 
 export const TrackerLeftContainer = styled.View`
-  flex: 0.75;
+  flex: 0.85;
   align-items: center;
   background-color: #BCC8E5;
   border-right-width: 1px;
@@ -24,13 +24,14 @@ export const TrackerLeftContainer = styled.View`
 `;
 
 export const TrackerCenterContainer = styled.View`
-  flex: 0.25;
+  flex: 0.05;
   align-items: center;
   justify-content: center;
   border-right-width: 1px;
 `;
 export const TrackerRightContainer = styled.View`
-  flex: 0.25;
+  flex: 0.15;
+  background-color: yellow;
   flex-direction: column;
   ${'' /* align-items: center; */}
   ${'' /* justify-content: center; */}

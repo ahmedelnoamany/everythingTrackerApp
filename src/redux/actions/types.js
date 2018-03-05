@@ -7,3 +7,4 @@ export const TOGGLE_UPDATE_TIMER = 'TOGGLE_UPDATE_TIMER';
 //timers types
 export const ADD_NEW_TIMER = 'ADD_NEW_TIMER';
 export const UPDATE_TIMER = 'UPDATE_TIMER';
+export const DELETE_TIMER = 'DELETE_TIMER';
