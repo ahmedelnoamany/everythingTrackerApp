@@ -9,7 +9,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { connect } from  'react-redux';
-import { updateTimer, incrementTimer, deleteTimer } from '../../redux/actions/timers';
+import { updateTimer, updateTrackerOrder, incrementTimer, deleteTimer } from '../../redux/actions/timers';
 import { toggleUpdateTimer } from '../../redux/actions/sidebar';
 import {
   Content
@@ -32,8 +32,6 @@ class TimerView extends Component {
       updateTimer : false,
       currentTimer: {},
       swipeView: false,
-      trackersObject: {},
-      order: []
     }
   }
   componentWillReceiveProps(props) {
@@ -41,7 +39,7 @@ class TimerView extends Component {
     if(props.updateTimerToggled === true){
       this.closeSwipeView(true)
     }
-    this.prepareScrollView(props);
+    // this.prepareScrollView(props);
   }
   closeSwipeView(close) {
     if(close){
@@ -50,16 +48,6 @@ class TimerView extends Component {
     else {
       this.setState({ swipeView: false })
     }
-  }
-  displayTimers(timersArray) {
-    console.log('DISPLAY TIMERS RECIEVED: ', timersArray);
-    if(timersArray){
-      console.log('Found Timer to Display');
-      return timersArray.map((timer, index) => (
-          this.buildTimer(timer)
-      ));
-    }
-
   }
   deleteTimer(timerID) {
     this.closeSwipeView(true);
@@ -72,85 +60,26 @@ class TimerView extends Component {
         ]
       );
   }
-  buildTimer(timer){
-    return (
-      <Swipeout
-        autoClose={true}
-        close={this.state.swipeView}
-        right={[
-          {
-            component: <Icon.Button
-              name='wrench'
-              onPress={() => this.props.toggleUpdateTimer(true, timer)}
-              borderRadius={0}
-              iconStyle={{marginRight: 0}}
-              style={{ backgroundColor: '#343A3F', width: '100%', height:'100%', justifyContent: 'center', borderColor: '#50565B', borderBottomWidth: 2, borderLeftWidth: 2}}
-              backgroundColor='#4D66A0'
-              >
-              </Icon.Button>
-          },
-          {
-            component: <Icon.Button
-              name='trash'
-              onPress={() => this.deleteTimer(timer.id)}
-              borderRadius={0}
-              iconStyle={{marginRight: 0}}
-              style={{ backgroundColor: 'red', width: '100%', height:'100%', justifyContent: 'center', borderColor: '#50565B', borderBottomWidth: 2, borderLeftWidth: 2}}
-              backgroundColor='#4D66A0'
-              >
-              </Icon.Button>
-          }
-        ]}
-        >
-        <TrackerContainer>
-          <View style={{flexDirection: 'row'}}>
-            <TrackerLeftContainer>
-              <Text>{timer.name}</Text>
-              <Text style={{fontSize: 10}}>Do Something: {timer.value} Goal Achieved: 0%</Text>
-            </TrackerLeftContainer>
-            <TrackerRightContainer>
-              <Icon.Button
-                name='plus-circle'
-                onPress={() => this.props.incrementTimer(timer)}
-                borderRadius={0}
-                iconStyle={{ marginRight: 0 }}
-                style={{backgroundColor: '#343A3F', height: '100%',justifyContent: 'center'}}
-                backgroundColor='#4D66A0'
-                >
-                </Icon.Button>
-            </TrackerRightContainer>
-          </View>
-
-        </TrackerContainer>
-      </Swipeout>
-
-    )
-  }
-  prepareScrollView(props) {
-    console.log('PREPARING... ');
-    console.log(props.savedTimers);
-    let trackerObj = {};
-    let timers = props.savedTimers;
-    for(var i = 0; i< timers.length; i++){
-      console.log('Timer Found...')
-      trackerObj[i] = timers[i];
-    }
-    let order = Object.keys(trackerObj);
-    this.setState({trackersObject: trackerObj, order})
-  }
+  // prepareScrollView(props) {
+  //   console.log('PREPARING... ');
+  //   console.log(props.savedTimers);
+  //   let trackerObj = {};
+  //   let timers = props.savedTimers;
+  //   for(var i = 0; i< timers.length; i++){
+  //     console.log('Timer Found...')
+  //     trackerObj[i] = timers[i];
+  //   }
+  //   let order = Object.keys(trackerObj);
+  //   this.setState({trackersObject: trackerObj, order})
+  // }
   render() {
     console.log('saved in state: ', this.props.sortHandlers);
     return (
         <SortableListView
         style={{ flex: 1 }}
-        data={this.state.trackersObject}
-        order={this.state.order}
-        onRowMoved={e => {
-          let { order } = this.state;
-          console.log(e);
-          order.splice(e.to, 0, order.splice(e.from, 1)[0])
-          this.setState({ order })
-        }}
+        data={this.props.savedTrackersObject}
+        order={this.props.order}
+        onRowMoved={e => this.props.updateTrackerOrder(e)}
         renderRow={row =>
 
           <TouchableHighlight
@@ -192,7 +121,7 @@ class TimerView extends Component {
                   <View style={{flexDirection: 'row'}}>
                     <TrackerLeftContainer>
                       <Text>{row.name}</Text>
-                      <Text style={{fontSize: 10}}>Do Something: {row.value} Goal Achieved: 0%</Text>
+                      <Text style={{fontSize: 10}}>Do Something: {row.id} Goal Achieved: 0%</Text>
                     </TrackerLeftContainer>
                     <TrackerRightContainer>
                       <Icon.Button
@@ -220,12 +149,14 @@ class TimerView extends Component {
 function bindActions(dispatch) {
   return {
     toggleUpdateTimer: (updateTimerToggled, selectedTimer) => dispatch(toggleUpdateTimer(updateTimerToggled, selectedTimer)),
+    updateTrackerOrder: (event) => dispatch(updateTrackerOrder(event)),
     incrementTimer: (timer) => dispatch(incrementTimer(timer)),
     deleteTimer: (timerID) => dispatch(deleteTimer(timerID))
   }
 }
 mapStateToProps = state => ({
-  savedTimers : state.timers.savedTimers,
+  savedTrackersObject : state.timers.savedTrackersObject,
+  order: state.timers.order,
   updateTimerToggled : state.sidebar.updateTimerToggled
 })
 

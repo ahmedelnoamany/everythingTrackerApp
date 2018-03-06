@@ -1,5 +1,7 @@
 const initialState = {
   savedTimers : [],
+  savedTrackersObject: {},
+  order : [],
   currentTimerID: 0
 }
 export default function(state = initialState, action) {
@@ -8,16 +10,17 @@ export default function(state = initialState, action) {
   }
   switch(action.type) {
     case 'ADD_NEW_TIMER': {
-      console.log('IN ADD NEW TIMER');
       var currentTimerID = state.currentTimerID;
       currentTimerID++;
       action.payload.id = currentTimerID;
       var updatedSavedTimersArray = state.savedTimers.slice();
       updatedSavedTimersArray.push(action.payload);
-      console.log('NEW RESULTS: ', updatedSavedTimersArray);
+      var updatedTrackersObject = buildTrackerObject(updatedSavedTimersArray);
       return {
         ...state,
         savedTimers : updatedSavedTimersArray,
+        savedTrackersObject: updatedTrackersObject.trackersObject,
+        order: updatedTrackersObject.order,
         currentTimerID: currentTimerID
       }
     }
@@ -45,9 +48,20 @@ export default function(state = initialState, action) {
         savedTimers : savedTimersArray
       }
     }
+    case 'UPDATE_TRACKER_ORDER': {
+      // var savedTimersArray = state.savedTimers.slice();
+      // console.log('Trackers before orderChange: ', savedTimersArray, state.order);
+      // var tempTracker = savedTimersArray[action.payload.to];
+      // savedTimersArray[action.payload.to] = savedTimersArray[action.payload.from];
+      // savedTimersArray[action.payload.from] = tempTracker;
+      var updatedOrder = updateTrackerObject(state.savedTrackersObject,state.order, action.payload);
+      return {
+        ...state,
+        order: updatedOrder
+      }
+    }
     case 'DELETE_TIMER': {
       var savedTimersArray = state.savedTimers.slice();
-      console.log('TIMERS BEFORE DELETE: ', savedTimersArray);
       savedTimersArray.map((timer, index) => {
         if(timer.id === action.payload){
           savedTimersArray.splice(index, 1);
@@ -62,4 +76,22 @@ export default function(state = initialState, action) {
     default :
       return state;
   }
+}
+
+function buildTrackerObject(timersArray) {
+  let trackersObject = {};
+  for(var i = 0; i < timersArray.length; i++){
+    trackersObject[i] = timersArray[i];
+  }
+  let order = Object.keys(trackersObject);
+  return {trackersObject, order};
+}
+
+function updateTrackerObject(trackerObject, order, event) {
+  let updatedOrder = order;
+  let tempTracker = updatedOrder[event.from];
+  updatedOrder.splice(event.from, 1);
+  updatedOrder.splice(event.to, 0, tempTracker);
+
+  return updatedOrder;
 }

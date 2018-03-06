@@ -1,6 +1,7 @@
 import {
   ADD_NEW_TIMER,
   UPDATE_TIMER,
+  UPDATE_TRACKER_ORDER,
   DELETE_TIMER
 } from './types';
 import {
@@ -20,6 +21,13 @@ export const updateTimer = (updatedTimer) => {
   return {
     type: UPDATE_TIMER,
     payload: updatedTimer
+  }
+}
+
+export const updateTrackerOrder = (event) => {
+  return {
+    type: UPDATE_TRACKER_ORDER,
+    payload: event
   }
 }
 
