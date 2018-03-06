@@ -9,9 +9,10 @@ export const TrackersContainer = styled.View`
   border-color: #50565B;
 `;
 
-export const TrackerContainer = styled.View`
+export const TrackerContainer = styled.ScrollView`
   border-bottom-width: 2px;
   border-color: #50565B;
+  width: 100%;
 `;
 
 export const TrackerLeftContainer = styled.View`
