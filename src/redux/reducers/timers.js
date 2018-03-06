@@ -15,7 +15,7 @@ export default function(state = initialState, action) {
       action.payload.id = currentTimerID;
       var updatedSavedTimersArray = state.savedTimers.slice();
       updatedSavedTimersArray.push(action.payload);
-      var updatedTrackersObject = buildTrackerObject(updatedSavedTimersArray);
+      var updatedTrackersObject = buildTrackerObject(updatedSavedTimersArray, state.order);
       return {
         ...state,
         savedTimers : updatedSavedTimersArray,
@@ -78,12 +78,20 @@ export default function(state = initialState, action) {
   }
 }
 
-function buildTrackerObject(timersArray) {
+function buildTrackerObject(timersArray, currentOrder) {
   let trackersObject = {};
+  let order = currentOrder;
   for(var i = 0; i < timersArray.length; i++){
     trackersObject[i] = timersArray[i];
   }
-  let order = Object.keys(trackersObject);
+  console.log('build order is: ', order);
+  if(order.length === 0) {
+    order = Object.keys(trackersObject);
+  }
+  else {
+    order.push((Number(order[order.length - 1]) + 1).toString());
+  }
+
   return {trackersObject, order};
 }
 
