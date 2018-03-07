@@ -35,11 +35,9 @@ class TimerView extends Component {
     }
   }
   componentWillReceiveProps(props) {
-    console.log('PROPS BEING RECEIVED', props)
     if(props.updateTimerToggled === true){
       this.closeSwipeView(true)
     }
-    // this.prepareScrollView(props);
   }
   closeSwipeView(close) {
     if(close){
@@ -56,15 +54,12 @@ class TimerView extends Component {
     for(var i = 0; i < timersArray.length; i++){
       trackersObject[i] = timersArray[i];
     }
-    console.log('build order is: ', order);
     if(order.length === 0) {
       order = Object.keys(trackersObject);
     }
     else {
       order.push((Number(order[order.length - 1]) + 1).toString());
     }
-
-    console.log(trackersObject)
     return trackersObject;
   }
 
@@ -79,20 +74,7 @@ class TimerView extends Component {
         ]
       );
   }
-  // prepareScrollView(props) {
-  //   console.log('PREPARING... ');
-  //   console.log(props.savedTimers);
-  //   let trackerObj = {};
-  //   let timers = props.savedTimers;
-  //   for(var i = 0; i< timers.length; i++){
-  //     console.log('Timer Found...')
-  //     trackerObj[i] = timers[i];
-  //   }
-  //   let order = Object.keys(trackerObj);
-  //   this.setState({trackersObject: trackerObj, order})
-  // }
   render() {
-    console.log('saved in state: ', this.props.order);
     return (
         <SortableListView
         style={{ flex: 1 }}
