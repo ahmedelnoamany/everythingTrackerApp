@@ -47,7 +47,7 @@ class MainContainer extends Component {
     return (
       <MainContent>
         <Sidebar />
-        { () => this.renderView()() }
+        {this.renderView() }
       </MainContent>
     );
   }
