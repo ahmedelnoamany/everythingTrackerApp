@@ -1,7 +1,8 @@
 import {
   ADD_NEW_TIMER,
   UPDATE_TIMER,
-  DELETE_TIMER
+  DELETE_TIMER,
+  UPDATE_TRACKER_ORDER
 } from './types';
 import {
   Alert
@@ -31,6 +32,13 @@ export const incrementTimer = (timer) => {
   return {
     type: UPDATE_TIMER,
     payload: incrementedTimer
+  }
+}
+
+export const updateTrackerOrder = (event) => {
+  return {
+    type: UPDATE_TRACKER_ORDER,
+    payload: event
   }
 }
 

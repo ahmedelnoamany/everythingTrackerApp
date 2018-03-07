@@ -53,13 +53,32 @@ export default function(state = initialState, action) {
           savedTimersArray.splice(index, 1);
         }
       })
-
       return {
         ...state,
         savedTimers: savedTimersArray
       }
     }
+      case 'UPDATE_TRACKER_ORDER': {
+      // var savedTimersArray = state.savedTimers.slice();
+      // console.log('Trackers before orderChange: ', savedTimersArray, state.order);
+      // var tempTracker = savedTimersArray[action.payload.to];
+      // savedTimersArray[action.payload.to] = savedTimersArray[action.payload.from];
+      // savedTimersArray[action.payload.from] = tempTracker;
+      var updatedOrder = updateTrackerOrder(state.savedTimers.slice(), action.payload);
+      return {
+        ...state,
+        savedTimers: updatedOrder
+      }
+    }
     default :
       return state;
   }
+}
+
+function updateTrackerOrder(savedTimers, event) {
+  let newTimers = savedTimers.slice();
+  let tempTracker = newTimers[event.from];
+  newTimers.splice(event.from, 1);
+  newTimers.splice(event.to, 0, tempTracker);
+  return newTimers;
 }
