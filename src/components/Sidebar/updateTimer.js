@@ -5,6 +5,7 @@ import {
   Button,
 } from 'react-native';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { updateTimer } from '../../redux/actions/timers';
 import { toggleUpdateTimer } from '../../redux/actions/sidebar';
 
@@ -41,6 +42,11 @@ class UpdateTimer extends Component {
     );
   }
 }
+UpdateTimer.propTypes = {
+  currentSelectedTimer: PropTypes.object.isRequired,
+  toggleUpdateTimer: PropTypes.func.isRequired,
+  updateTimer: PropTypes.func.isRequired,
+};
 function bindActions(dispatch) {
   return {
     updateTimer: updatedTimer =>

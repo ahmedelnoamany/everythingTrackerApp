@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 import Swipeout from 'react-native-swipeout';
 import SortableListView from 'react-native-sortable-listview';
 import {
@@ -118,7 +119,7 @@ class TimerView extends Component {
                       }}
                       backgroundColor='#4D66A0'
                     >
-                    </Icon.Button>,
+                    </Icon.Button>
                   },
                   {
                     component: <Icon.Button
@@ -137,7 +138,7 @@ class TimerView extends Component {
                       }}
                       backgroundColor='#4D66A0'
                     >
-                    </Icon.Button>,
+                    </Icon.Button>
                   },
                 ]}
               >
@@ -168,12 +169,21 @@ class TimerView extends Component {
                 </TrackerContainer>
               </Swipeout>
             </View>
-           </TouchableHighlight>)
+          </TouchableHighlight>)
         }
       />
     );
   }
 }
+TimerView.propTypes = {
+  updateTimerToggled: PropTypes.bool.isRequired,
+  savedTimers: PropTypes.array.isRequired,
+  toggleUpdateTimer: PropTypes.func.isRequired,
+  deleteTimer: PropTypes.func.isRequired,
+  updateTrackerOrder: PropTypes.func.isRequired,
+  sortHandlers: PropTypes.object.isRequired,
+  incrementTimer: PropTypes.func.isRequired,
+};
 function bindActions(dispatch) {
   return {
     toggleUpdateTimer: (updateTimerToggled, selectedTimer) =>

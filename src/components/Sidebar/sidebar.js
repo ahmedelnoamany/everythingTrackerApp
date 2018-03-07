@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Text } from 'react-native';
 import {
   SidebarContainer,
@@ -61,7 +62,13 @@ const Sidebar = props => (
     }
   </SidebarContainer>
 );
-
+Sidebar.propTypes = {
+  newTimerToggled: PropTypes.bool.isRequired,
+  customTimerToggled: PropTypes.bool.isRequired,
+  updateTimerToggled: PropTypes.bool.isRequired,
+  toggleNewTimer: PropTypes.func.isRequired,
+  toggleCustomTimer: PropTypes.func.isRequired,
+};
 function bindActions(dispatch) {
   return {
     toggleNewTimer: newTimerToggled =>

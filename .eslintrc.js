@@ -9,6 +9,8 @@ module.exports = {
         "component": true,
         "html": false
       }],
-      "class-methods-use-this": ["error", { "exceptMethods": ["buildTrackerObject"] }]
+      "class-methods-use-this": ["error", { "exceptMethods": ["buildTrackerObject"] }],
+      "react/forbid-prop-types": ["disabled"],
+
     },
 };

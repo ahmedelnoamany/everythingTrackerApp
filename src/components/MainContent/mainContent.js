@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Text,
   TouchableHighlight,
@@ -52,6 +53,12 @@ class MainContainer extends Component {
     );
   }
 }
+MainContainer.propTypes = {
+  newTimerToggled: PropTypes.bool.isRequired,
+  customTimerToggled: PropTypes.bool.isRequired,
+  updateTimerToggled: PropTypes.bool.isRequired,
+  toggleDefaultView: PropTypes.func.isRequired,
+};
 
 function bindActions(dispatch) {
   return {

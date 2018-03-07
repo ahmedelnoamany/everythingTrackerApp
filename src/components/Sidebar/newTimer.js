@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as sidebarActions from '../../redux/actions/sidebar';
 import { addNewTimer } from '../../redux/actions/timers';
 import {
@@ -35,6 +36,10 @@ class NewTimer extends Component {
     );
   }
 }
+NewTimer.propTypes = {
+  addNewTimer: PropTypes.func.isRequired,
+  toggleNewTimer: PropTypes.func.isRequired,
+};
 function bindActions(dispatch) {
   return {
     toggleNewTimer: newTimerToggled =>
