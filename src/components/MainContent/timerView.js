@@ -49,6 +49,25 @@ class TimerView extends Component {
       this.setState({ swipeView: false })
     }
   }
+
+  buildTrackerObject(timersArray) {
+    let trackersObject = {};
+    let order = [];
+    for(var i = 0; i < timersArray.length; i++){
+      trackersObject[i] = timersArray[i];
+    }
+    console.log('build order is: ', order);
+    if(order.length === 0) {
+      order = Object.keys(trackersObject);
+    }
+    else {
+      order.push((Number(order[order.length - 1]) + 1).toString());
+    }
+
+    console.log(trackersObject)
+    return trackersObject;
+  }
+
   deleteTimer(timerID) {
     this.closeSwipeView(true);
      Alert.alert(
@@ -73,12 +92,14 @@ class TimerView extends Component {
   //   this.setState({trackersObject: trackerObj, order})
   // }
   render() {
-    console.log('saved in state: ', this.props.sortHandlers);
+    console.log('saved in state: ', this.props.order);
     return (
         <SortableListView
         style={{ flex: 1 }}
-        data={this.props.savedTrackersObject}
-        order={this.props.order}
+        data={JSON.parse(JSON.stringify(this.buildTrackerObject(this.props.savedTimers)))}
+        order={this.props.savedTimers.map((item, index) => {
+          return index.toString();
+        })}
         onRowMoved={e => this.props.updateTrackerOrder(e)}
         renderRow={row =>
 
@@ -121,7 +142,7 @@ class TimerView extends Component {
                   <View style={{flexDirection: 'row'}}>
                     <TrackerLeftContainer>
                       <Text>{row.name}</Text>
-                      <Text style={{fontSize: 10}}>Do Something: {row.id} Goal Achieved: 0%</Text>
+                      <Text style={{fontSize: 10}}>Do Something: {row.value} Goal Achieved: 0%</Text>
                     </TrackerLeftContainer>
                     <TrackerRightContainer>
                       <Icon.Button
@@ -157,7 +178,8 @@ function bindActions(dispatch) {
 mapStateToProps = state => ({
   savedTrackersObject : state.timers.savedTrackersObject,
   order: state.timers.order,
-  updateTimerToggled : state.sidebar.updateTimerToggled
+  updateTimerToggled : state.sidebar.updateTimerToggled,
+  savedTimers: state.timers.savedTimers
 })
 
 export default connect(mapStateToProps, bindActions)(TimerView);

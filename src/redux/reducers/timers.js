@@ -1,7 +1,5 @@
 const initialState = {
   savedTimers : [],
-  savedTrackersObject: {},
-  order : [],
   currentTimerID: 0
 }
 export default function(state = initialState, action) {
@@ -15,12 +13,9 @@ export default function(state = initialState, action) {
       action.payload.id = currentTimerID;
       var updatedSavedTimersArray = state.savedTimers.slice();
       updatedSavedTimersArray.push(action.payload);
-      var updatedTrackersObject = buildTrackerObject(updatedSavedTimersArray, state.order);
       return {
         ...state,
         savedTimers : updatedSavedTimersArray,
-        savedTrackersObject: updatedTrackersObject.trackersObject,
-        order: updatedTrackersObject.order,
         currentTimerID: currentTimerID
       }
     }
@@ -48,18 +43,6 @@ export default function(state = initialState, action) {
         savedTimers : savedTimersArray
       }
     }
-    case 'UPDATE_TRACKER_ORDER': {
-      // var savedTimersArray = state.savedTimers.slice();
-      // console.log('Trackers before orderChange: ', savedTimersArray, state.order);
-      // var tempTracker = savedTimersArray[action.payload.to];
-      // savedTimersArray[action.payload.to] = savedTimersArray[action.payload.from];
-      // savedTimersArray[action.payload.from] = tempTracker;
-      var updatedOrder = updateTrackerObject(state.savedTrackersObject,state.order, action.payload);
-      return {
-        ...state,
-        order: updatedOrder
-      }
-    }
     case 'DELETE_TIMER': {
       var savedTimersArray = state.savedTimers.slice();
       savedTimersArray.map((timer, index) => {
@@ -67,10 +50,21 @@ export default function(state = initialState, action) {
           savedTimersArray.splice(index, 1);
         }
       })
-
       return {
         ...state,
         savedTimers: savedTimersArray
+      }
+    }
+      case 'UPDATE_TRACKER_ORDER': {
+      // var savedTimersArray = state.savedTimers.slice();
+      // console.log('Trackers before orderChange: ', savedTimersArray, state.order);
+      // var tempTracker = savedTimersArray[action.payload.to];
+      // savedTimersArray[action.payload.to] = savedTimersArray[action.payload.from];
+      // savedTimersArray[action.payload.from] = tempTracker;
+      var updatedOrder = updateTrackerOrder(state.savedTimers.slice(), action.payload);
+      return {
+        ...state,
+        savedTimers: updatedOrder
       }
     }
     default :
@@ -78,28 +72,10 @@ export default function(state = initialState, action) {
   }
 }
 
-function buildTrackerObject(timersArray, currentOrder) {
-  let trackersObject = {};
-  let order = currentOrder;
-  for(var i = 0; i < timersArray.length; i++){
-    trackersObject[i] = timersArray[i];
-  }
-  console.log('build order is: ', order);
-  if(order.length === 0) {
-    order = Object.keys(trackersObject);
-  }
-  else {
-    order.push((Number(order[order.length - 1]) + 1).toString());
-  }
-
-  return {trackersObject, order};
-}
-
-function updateTrackerObject(trackerObject, order, event) {
-  let updatedOrder = order;
-  let tempTracker = updatedOrder[event.from];
-  updatedOrder.splice(event.from, 1);
-  updatedOrder.splice(event.to, 0, tempTracker);
-
-  return updatedOrder;
+function updateTrackerOrder(savedTimers, event) {
+  let newTimers = savedTimers.slice();
+  let tempTracker = newTimers[event.from];
+  newTimers.splice(event.from, 1);
+  newTimers.splice(event.to, 0, tempTracker);
+  return newTimers;
 }
