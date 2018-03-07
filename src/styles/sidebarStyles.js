@@ -1,8 +1,3 @@
-import {
-  View,
-  TouchableOpacity,
-  Text
-} from 'react-native';
 import styled from 'styled-components';
 
 export const SidebarContainer = styled.View`
@@ -40,4 +35,4 @@ export const ButtonTextStyle = styled.Text`
   font-size: 14px;
   text-align: center;
   color: #343A3F;
-`
+`;

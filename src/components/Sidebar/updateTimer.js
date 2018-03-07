@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   TextInput,
   Button,
 } from 'react-native';
@@ -13,12 +12,12 @@ class UpdateTimer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name : this.props.currentSelectedTimer.name,
-    }
+      name: this.props.currentSelectedTimer.name,
+    };
   }
-  buildUpdatedTimer = () => {
+  buildUpdatedTimer() {
     this.props.toggleUpdateTimer(false);
-    var currentTimer = this.props.currentSelectedTimer;
+    const currentTimer = this.props.currentSelectedTimer;
     currentTimer.name = this.state.name;
     this.props.updateTimer(currentTimer);
   }
@@ -26,27 +25,33 @@ class UpdateTimer extends Component {
     return (
       <View>
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText= {(name) => this.setState({name})}
-          placeholder = 'name'
+          style={{
+            height: 40,
+            borderColor: 'gray',
+            borderWidth: 1,
+          }}
+          onChangeText={name => this.setState({ name })}
+          placeholder='name'
         />
         <Button
           title='Save!'
           onPress={() => this.buildUpdatedTimer()}
         />
       </View>
-    )
+    );
   }
 }
 function bindActions(dispatch) {
   return {
-    updateTimer: (updatedTimer) => dispatch(updateTimer(updatedTimer)),
-    toggleUpdateTimer: () => dispatch(toggleUpdateTimer())
-  }
+    updateTimer: updatedTimer =>
+      dispatch(updateTimer(updatedTimer)),
+    toggleUpdateTimer: () =>
+      dispatch(toggleUpdateTimer()),
+  };
 }
 
-mapStateToProps = state => ({
-  currentSelectedTimer: state.sidebar.selectedTimer
-})
+const mapStateToProps = state => ({
+  currentSelectedTimer: state.sidebar.selectedTimer,
+});
 
 export default connect(mapStateToProps, bindActions)(UpdateTimer);

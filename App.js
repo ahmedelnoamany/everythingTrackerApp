@@ -1,30 +1,22 @@
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React from 'react';
+import { Text } from 'react-native';
 import {
   MainContainer,
-  Header
+  Header,
 } from './src/styles/appStyles';
 
 import MainContent from './src/components/MainContent/mainContent';
 
-type Props = {};
+const App = () => (
+  <MainContainer>
+    <Header>
+      <Text style={{ color: '#343A3F' }}>
+        --EverythingTracker--
+      </Text>
+    </Header>
+    <MainContent />
+  </MainContainer>
 
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <MainContainer>
-        <Header>
-          <Text style={{color: '#343A3F'}}>
-            --EverythingTracker--
-          </Text>
-        </Header>
-        <MainContent />
-      </MainContainer>
-    );
-  }
-}
+);
+
+export default App;

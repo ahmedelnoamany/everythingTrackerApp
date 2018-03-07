@@ -1,8 +1,4 @@
 import styled from 'styled-components';
-import {
-  View,
-  ScrollView
-} from 'react-native';
 
 export const TrackersContainer = styled.View`
   border-top-width: 1px;
@@ -34,6 +30,4 @@ export const TrackerRightContainer = styled.View`
   flex: 0.15;
   background-color: yellow;
   flex-direction: column;
-  ${'' /* align-items: center; */}
-  ${'' /* justify-content: center; */}
 `;
