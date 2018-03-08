@@ -11,13 +11,14 @@ import {
 } from '../../styles/sidebarStyles';
 
 class NewTimer extends Component {
-  addNewTimer(name, type, stepSize) {
+  addNewTimer(name, type, stepSize, dailyGoal) {
     const newTimerObject = {
       id: 0,
       name,
       type,
       increment: stepSize,
       value: 0,
+      dailyGoal,
     };
     this.props.addNewTimer(newTimerObject);
     this.props.toggleNewTimer(false);
@@ -27,7 +28,7 @@ class NewTimer extends Component {
       <SidebarContent>
         <SidebarUpper>
           <SidebarButton
-            onPress={() => this.addNewTimer('Test Timer 1', 'increment', 1)}
+            onPress={() => this.addNewTimer('Test Timer 1', 'increment', 1, 10)}
           >
             <ButtonTextStyle>Increment Tracker</ButtonTextStyle>
           </SidebarButton>

@@ -13,7 +13,6 @@ export const TrackerContainer = styled.ScrollView`
 
 export const TrackerLeftContainer = styled.View`
   flex: 0.85;
-  align-items: center;
   background-color: #BCC8E5;
   border-right-width: 1px;
   border-color: #50565B;

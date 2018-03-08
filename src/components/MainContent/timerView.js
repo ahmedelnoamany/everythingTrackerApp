@@ -17,14 +17,18 @@ import {
   TrackerLeftContainer,
   TrackerRightContainer,
 } from '../../styles/trackerViewStyles';
-
+import ProgressBar from './ProgressBar';
 
 class TimerView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       swipeView: false,
+      viewWidth: 0,
     };
+  }
+  onLayout = e => {
+    this.setState({ viewWidth: e.nativeEvent.layout.width })
   }
   componentWillReceiveProps(props) {
     if (props.updateTimerToggled === true) {
@@ -144,16 +148,27 @@ class TimerView extends Component {
               >
                 <TrackerContainer>
                   <View style={{ flexDirection: 'row' }}>
-                    <TrackerLeftContainer>
-                      <Text>{row.name}</Text>
-                      <Text style={{ fontSize: 10 }}>
-                        Do Something: {row.value} Goal Achieved: 0%
-                      </Text>
+                    <TrackerLeftContainer onLayout={e => this.onLayout(e)}>
+                      <View style={{alignItems:'center'}}>
+                        <Text>{row.name}</Text>
+                        <Text style={{ fontSize: 10 }}>
+                          Do Something: {row.value} Goal Achieved: {row.value / row.dailyGoal * 100 }%
+                        </Text>
+                      </View>
+                      <View style={{paddingTop: 2}}>
+                      <ProgressBar
+                          progress={(row.value / row.dailyGoal)}
+                          width={this.state.viewWidth - 1}
+                          backgroundStyle={{backgroundColor: 'red'}}
+                          fillStyle={{backgroundColor:'yellow'}}
+                        />
+                        
+                      </View>
                     </TrackerLeftContainer>
                     <TrackerRightContainer>
                       <Icon.Button
                         name='plus-circle'
-                        onPress={() => this.props.incrementTimer(row)}
+                        onPress={() => (row.value / row.dailyGoal) >= 1 ? 0 : this.props.incrementTimer(row)}
                         borderRadius={0}
                         iconStyle={{ marginRight: 0 }}
                         style={{
@@ -176,14 +191,20 @@ class TimerView extends Component {
   }
 }
 TimerView.propTypes = {
-  updateTimerToggled: PropTypes.bool.isRequired,
+  updateTimerToggled: PropTypes.bool,
   savedTimers: PropTypes.array.isRequired,
   toggleUpdateTimer: PropTypes.func.isRequired,
   deleteTimer: PropTypes.func.isRequired,
   updateTrackerOrder: PropTypes.func.isRequired,
-  sortHandlers: PropTypes.object.isRequired,
+  sortHandlers: PropTypes.object,
   incrementTimer: PropTypes.func.isRequired,
 };
+
+TimerView.defaultProps = {
+  updateTimerToggled: false,
+  sortHandlers: {},
+};
+
 function bindActions(dispatch) {
   return {
     toggleUpdateTimer: (updateTimerToggled, selectedTimer) =>

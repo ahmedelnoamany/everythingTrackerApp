@@ -65,7 +65,7 @@ const Sidebar = props => (
 Sidebar.propTypes = {
   newTimerToggled: PropTypes.bool.isRequired,
   customTimerToggled: PropTypes.bool.isRequired,
-  updateTimerToggled: PropTypes.bool.isRequired,
+  updateTimerToggled: PropTypes.bool,
   toggleNewTimer: PropTypes.func.isRequired,
   toggleCustomTimer: PropTypes.func.isRequired,
 };
