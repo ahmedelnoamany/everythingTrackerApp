@@ -8,6 +8,7 @@ import {
   Text,
   Alert,
   TouchableHighlight,
+  Modal,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { updateTrackerOrder, incrementTimer, deleteTimer } from '../../redux/actions/timers';
@@ -18,6 +19,7 @@ import {
   TrackerRightContainer,
 } from '../../styles/trackerViewStyles';
 import ProgressBar from './ProgressBar';
+import TrackerModal from './trackerModal';
 
 class TimerView extends Component {
   constructor(props) {
@@ -25,6 +27,8 @@ class TimerView extends Component {
     this.state = {
       swipeView: false,
       viewWidth: 0,
+      modalVisible: false,
+      currentTracker: {},
     };
   }
   onLayout = e => {
@@ -68,8 +72,13 @@ class TimerView extends Component {
       ],
     );
   }
+  handleCloseModal() {
+    this.setState({modalVisible: false});
+  }
   render() {
     return (
+      <View style={{flex: 1}}>
+      <TrackerModal modalVisible={this.state.modalVisible} currentTracker={this.state.currentTracker} onModalClose={() => this.handleCloseModal()}/>
       <SortableListView
         style={{ flex: 1 }}
         data={JSON.parse(JSON.stringify(this.buildTrackerObject(this.props.savedTimers)))}
@@ -149,21 +158,27 @@ class TimerView extends Component {
                 <TrackerContainer>
                   <View style={{ flexDirection: 'row' }}>
                     <TrackerLeftContainer onLayout={e => this.onLayout(e)}>
-                      <View style={{alignItems:'center'}}>
-                        <Text>{row.name}</Text>
-                        <Text style={{ fontSize: 10 }}>
-                          Do Something: {row.value} Goal Achieved: {row.value / row.dailyGoal * 100 }%
-                        </Text>
-                      </View>
-                      <View style={{paddingTop: 2}}>
-                      <ProgressBar
-                          progress={(row.value / row.dailyGoal)}
-                          width={this.state.viewWidth - 1}
-                          backgroundStyle={{backgroundColor: 'red'}}
-                          fillStyle={{backgroundColor:'yellow'}}
-                        />
-                        
-                      </View>
+                      <TouchableHighlight
+                      style={{backgroundColor: 'green'}}
+                      onPress = {() => {this.setState({modalVisible: true, currentTracker: row})}}
+                      >
+                        <View>
+                          <View style={{alignItems:'center'}}>
+                          <Text>{row.name}</Text>
+                          <Text style={{ fontSize: 10 }}>
+                            Do Something: {row.value} Goal Achieved: {row.value / row.dailyGoal * 100 }%
+                          </Text>
+                        </View>
+                          <View style={{paddingTop: 2}}>
+                          <ProgressBar
+                              progress={(row.value / row.dailyGoal)}
+                              width={this.state.viewWidth - 1}
+                              backgroundStyle={{backgroundColor: 'red'}}
+                              fillStyle={{backgroundColor:'yellow'}}
+                            />
+                          </View>
+                        </View>
+                      </TouchableHighlight>
                     </TrackerLeftContainer>
                     <TrackerRightContainer>
                       <Icon.Button
@@ -187,6 +202,7 @@ class TimerView extends Component {
           </TouchableHighlight>)
         }
       />
+      </View>
     );
   }
 }
