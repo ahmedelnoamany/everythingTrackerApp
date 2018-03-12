@@ -4,7 +4,7 @@ export const MainContainer = styled.View`
   flex: 1;
   justify-content: flex-start;
   align-items: center;
-  background-color: #DCEDFF;
+  background-color: #FEFFFE;
 `;
 
 export const Header = styled.View`
@@ -12,5 +12,5 @@ export const Header = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: #93B4D8;
+  background-color: #C5D5EA;
 `;

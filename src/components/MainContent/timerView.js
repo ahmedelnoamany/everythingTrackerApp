@@ -159,7 +159,6 @@ class TimerView extends Component {
                   <View style={{ flexDirection: 'row' }}>
                     <TrackerLeftContainer onLayout={e => this.onLayout(e)}>
                       <TouchableHighlight
-                      style={{backgroundColor: 'green'}}
                       onPress = {() => {this.setState({modalVisible: true, currentTracker: row})}}
                       >
                         <View>

@@ -1,26 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Modal,
   Text,
   View,
   Button,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 const TrackerModal = props => (
   <Modal
     visible={props.modalVisible}
-    animationType={'slide'}
+    animationType='slide'
+    transparent
   >
-    <View>
-        <Text>
+    <View
+      style={{ flex: 1, backgroundColor: 'red', marginTop: 80 }}
+    >
+      <View style={{
+        flex: 0.1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5,
+      }}
+      >
+        <View>
+          <Text>
             {props.currentTracker.name}
-        </Text>
-        <Button
-        onPress={() => props.onModalClose(false)}
-        title='back'
-        />
+          </Text>
+        </View>
+        <View>
+          <Button
+            onPress={() => props.onModalClose(false)}
+            title='X'
+          />
+        </View>
+      </View>
+      <View style={{ flex: 0.9, backgroundColor: 'yellow' }} />
     </View>
   </Modal>
 );
+
+TrackerModal.propTypes = {
+  modalVisible: PropTypes.bool.isRequired,
+  currentTracker: PropTypes.object.isRequired,
+  onModalClose: PropTypes.func.isRequired,
+};
 
 export default TrackerModal;

@@ -10,5 +10,7 @@ export const Content = styled.View`
   width: 100%;
   flex: 0.7;
   border-color: #50565B;
-  border-top-width: 2px;
+  shadow-color: black;
+  shadow-radius: 10;
+  shadow-Opacity: 1;
 `;
