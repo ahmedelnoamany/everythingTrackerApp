@@ -3,22 +3,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LinearGradient from 'react-native-linear-gradient';
 import { Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   SidebarContainer,
   SidebarContent,
-  SidebarButton,
-  ButtonTextStyle,
   SidebarUpper,
   SidebarLower,
+  SidebarStyles,
 } from '../../styles/sidebarStyles';
 import * as sidebarActions from '../../redux/actions/sidebar';
 import NewTimer from './newTimer';
 import CustomTimer from './customTimer';
 import UpdateTimer from './updateTimer';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Sidebar = props => (
-  <SidebarContainer style={{shadowColor: 'black', shadowRadius: 10, shadowOpacity: 0.3}}>
+  <SidebarContainer style={{ shadowColor: 'black', shadowRadius: 10, shadowOpacity: 0.3 }}>
     <LinearGradient colors={['#C5D5EA', '#91ADC2']}>
       {
         !props.newTimerToggled
@@ -31,11 +30,9 @@ const Sidebar = props => (
               <Icon.Button
                 name='timer'
                 onPress={() => props.toggleNewTimer(true)}
-                style={{
-                  backgroundColor: '#2B2D42', justifyContent: 'flex-start', width: '100%', borderRadius: 0, flexDirection: 'row',
-                }}
+                style={SidebarStyles.SidebarButton}
               >
-                <Text style={{ fontSize: 12, color: '#E9EBF8',flex: 1, flexWrap: 'wrap' }}>
+                <Text style={SidebarStyles.SidebarButtonText}>
               New Tracker
                 </Text>
               </Icon.Button>
@@ -44,11 +41,9 @@ const Sidebar = props => (
               <Icon.Button
                 name='av-timer'
                 onPress={() => props.toggleCustomTimer(true)}
-                style={{ 
-                  backgroundColor: '#2B2D42', justifyContent: 'flex-start', width: '100%', borderRadius: 0, flexDirection: 'row'
-                }}
+                style={SidebarStyles.SidebarButton}
               >
-                <Text style={{ fontSize: 12, color: '#E9EBF8', flex: 1, flexWrap: 'wrap' }}>
+                <Text style={SidebarStyles.SidebarButtonText} >
               Custom Tracker
                 </Text>
               </Icon.Button>

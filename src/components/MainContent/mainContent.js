@@ -42,17 +42,7 @@ class MainContainer extends Component {
             <Text style={{ color: 'white' }}>Click to go back</Text>
           </TouchableHighlight>)}
         <View style={{ height: '100%' }}>
-          {/* <View style={{ flex: 0.3, backgroundColor: '#343A3F' }}>
-            <ProgressBarView />
-          </View> */}
-          {/* <View style={{
-            flex: 0.7,
-            borderTopWidth: 1,
-            borderColor: '#50565B',
-          }}
-          > */}
           <TimerView />
-          {/* </View> */}
         </View>
       </Content>
     );

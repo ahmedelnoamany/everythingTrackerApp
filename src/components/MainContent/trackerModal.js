@@ -3,9 +3,10 @@ import {
   Modal,
   Text,
   View,
-  Button,
+  TouchableHighlight,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const TrackerModal = props => (
   <Modal
@@ -25,14 +26,13 @@ const TrackerModal = props => (
             {props.currentTracker.name}
           </Text>
         </View>
-        <View>
-          <Button
-            onPress={() => props.onModalClose(false)}
-            title='X'
-          />
+        <View style={{ paddingRight: '2%' }}>
+          <TouchableHighlight onPress={() => props.onModalClose(false)} >
+            <Icon name='close' size={30} color='#2B2D42' />
+          </TouchableHighlight>
         </View>
       </View>
-      <View style={{ flex: 0.9, backgroundColor: 'FEFFFE' }} />
+      <View style={{ flex: 0.9, backgroundColor: '#FEFFFE' }} />
     </View>
   </Modal>
 );

@@ -1,4 +1,21 @@
 import styled from 'styled-components';
+import { StyleSheet } from 'react-native';
+
+export const SidebarStyles = StyleSheet.create({
+  SidebarButton: {
+    backgroundColor: '#2B2D42',
+    justifyContent: 'flex-start',
+    width: '100%',
+    borderRadius: 0,
+    flexDirection: 'row',
+  },
+  SidebarButtonText: {
+    fontSize: 12,
+    color: '#E9EBF8',
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+});
 
 export const SidebarContainer = styled.View`
   flex: 0.3;
@@ -20,14 +37,6 @@ export const SidebarLower = styled.View`
   justify-content: flex-end;
   padding: 5px;
   flex: 0.5;
-`;
-export const SidebarButton = styled.TouchableOpacity`
-  border-color: #E9EBF8;
-  border-bottom-width: 2px;
-  align-items: center;
-  height: 15%;
-  padding: 2px;
-  justify-content: center;
 `;
 
 export const ButtonTextStyle = styled.Text`
