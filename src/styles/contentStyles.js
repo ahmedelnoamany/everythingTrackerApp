@@ -12,5 +12,5 @@ export const Content = styled.View`
   border-color: #50565B;
   shadow-color: black;
   shadow-radius: 10;
-  shadow-Opacity: 1;
+  shadow-Opacity: 0.3;
 `;

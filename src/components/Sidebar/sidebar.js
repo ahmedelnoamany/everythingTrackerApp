@@ -18,7 +18,7 @@ import UpdateTimer from './updateTimer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Sidebar = props => (
-  <SidebarContainer style={{shadowColor: 'black', shadowRadius: 10, shadowOpacity: 1}}>
+  <SidebarContainer style={{shadowColor: 'black', shadowRadius: 10, shadowOpacity: 0.3}}>
     <LinearGradient colors={['#C5D5EA', '#91ADC2']}>
       {
         !props.newTimerToggled
@@ -31,8 +31,8 @@ const Sidebar = props => (
               <Icon.Button
                 name='timer'
                 onPress={() => props.toggleNewTimer(true)}
-                style={{ 
-                  backgroundColor: '#2B2D42', justifyContent: 'flex-start', width: '100%', borderRadius: 0, flexDirection: 'row'
+                style={{
+                  backgroundColor: '#2B2D42', justifyContent: 'flex-start', width: '100%', borderRadius: 0, flexDirection: 'row',
                 }}
               >
                 <Text style={{ fontSize: 12, color: '#E9EBF8',flex: 1, flexWrap: 'wrap' }}>

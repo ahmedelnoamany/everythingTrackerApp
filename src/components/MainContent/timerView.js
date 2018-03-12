@@ -91,7 +91,7 @@ class TimerView extends Component {
           >
             <View style={{
               flex: 1,
-              backgroundColor: '#343A3F',
+              backgroundColor: '#2B2D42',
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
@@ -104,7 +104,7 @@ class TimerView extends Component {
                   flex: 0.1,
                   borderTopWidth: 1,
                   borderColor: 'white',
-                  backgroundColor: '#343A3F',
+                  backgroundColor: '#2B2D42',
                   color: 'white',
                   textAlign: 'center',
                   alignItems: 'center',
@@ -122,7 +122,7 @@ class TimerView extends Component {
                       borderRadius={0}
                       iconStyle={{ marginRight: 0 }}
                       style={{
-                        backgroundColor: '#343A3F',
+                        backgroundColor: '#2B2D42',
                         width: '100%',
                         height: '100%',
                         justifyContent: 'center',
@@ -186,7 +186,7 @@ class TimerView extends Component {
                         borderRadius={0}
                         iconStyle={{ marginRight: 0 }}
                         style={{
-                          backgroundColor: '#343A3F',
+                          backgroundColor: '#2B2D42',
                           height: '100%',
                           justifyContent: 'center',
                         }}
