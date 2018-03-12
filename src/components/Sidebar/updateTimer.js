@@ -2,12 +2,19 @@ import React, { Component } from 'react';
 import {
   View,
   TextInput,
-  Button,
+  TouchableHighlight,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { updateTimer } from '../../redux/actions/timers';
 import { toggleUpdateTimer } from '../../redux/actions/sidebar';
+import {
+  SidebarContent,
+  SidebarUpper,
+  SidebarLower,
+  SidebarStyles,
+} from '../../styles/sidebarStyles';
 
 class UpdateTimer extends Component {
   constructor(props) {
@@ -24,21 +31,32 @@ class UpdateTimer extends Component {
   }
   render() {
     return (
-      <View>
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1,
-          }}
-          onChangeText={name => this.setState({ name })}
-          placeholder='name'
-        />
-        <Button
-          title='Save!'
-          onPress={() => this.buildUpdatedTimer()}
-        />
-      </View>
+      <SidebarContent>
+        <SidebarUpper>
+          <View style={{margin: '4%'}}>
+            <TextInput
+              style={{
+                height: 40,
+                borderColor: 'gray',
+                borderWidth: 1,
+                textAlign:'center'
+              }}
+              onChangeText={name => this.setState({ name })}
+              placeholder='name'
+            />
+          </View>
+        </SidebarUpper>
+        <SidebarLower>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <TouchableHighlight onPress={() => this.buildUpdatedTimer()} >
+              <Icon name='save' size={50} color='#2B2D42' />
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => this.props.toggleUpdateTimer(false)} >
+              <Icon name='cancel' size={50} color='#2B2D42' />
+            </TouchableHighlight>
+          </View>
+        </SidebarLower>
+      </SidebarContent>
     );
   }
 }

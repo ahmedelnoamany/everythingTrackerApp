@@ -95,6 +95,7 @@ class TimerView extends Component {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
+              borderRadius: 12,
             }}
             >
               <Icon

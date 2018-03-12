@@ -13,4 +13,8 @@ export const Header = styled.View`
   justify-content: center;
   align-items: center;
   background-color: #C5D5EA;
+  shadow-color: black;
+  shadow-radius: 10;
+  shadow-opacity: 0.1;
+  shadow-offset: 0px 15px;
 `;

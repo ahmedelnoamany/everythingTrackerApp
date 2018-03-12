@@ -17,7 +17,7 @@ import CustomTimer from './customTimer';
 import UpdateTimer from './updateTimer';
 
 const Sidebar = props => (
-  <SidebarContainer style={{ shadowColor: 'black', shadowRadius: 10, shadowOpacity: 0.3 }}>
+  <SidebarContainer>
     <LinearGradient colors={['#C5D5EA', '#91ADC2']}>
       {
         !props.newTimerToggled

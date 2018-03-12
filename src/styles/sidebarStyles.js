@@ -21,6 +21,10 @@ export const SidebarContainer = styled.View`
   flex: 0.3;
   background-color: #93B4D8;
   border-color: #50565B;
+  shadow-color: black;
+  shadow-radius: 10;
+  shadow-opacity: 0.3;
+  shadow-offset: 0px 20px;
 
 `;
 
