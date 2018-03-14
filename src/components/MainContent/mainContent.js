@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   Text,
   TouchableHighlight,
@@ -49,10 +50,12 @@ class MainContainer extends Component {
   }
   render() {
     return (
-      <MainContent>
-        <Sidebar />
-        {this.renderView() }
-      </MainContent>
+      <LinearGradient colors={['#FCFCFC', '#E7E7E5', '#DCDCDA']}>
+        <MainContent>
+          <Sidebar />
+          {this.renderView() }
+        </MainContent>
+      </LinearGradient>
     );
   }
 }

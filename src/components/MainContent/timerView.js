@@ -29,6 +29,7 @@ class TimerView extends Component {
       viewWidth: 0,
       modalVisible: false,
       currentTracker: {},
+      contentHeight: 0,
     };
   }
   onLayout = e => {
@@ -77,7 +78,7 @@ class TimerView extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1}} onLayout={e => this.setState({ contentHeight: e.nativeEvent.layout.height })}>
       <TrackerModal modalVisible={this.state.modalVisible} currentTracker={this.state.currentTracker} onModalClose={() => this.handleCloseModal()}/>
       <SortableListView
         style={{ flex: 1 }}
@@ -91,28 +92,36 @@ class TimerView extends Component {
           >
             <View style={{
               flex: 1,
-              backgroundColor: '#2B2D42',
+              height: this.state.contentHeight / 10,
+              marginTop: '5%',
+              marginHorizontal: '2%',
+              backgroundColor: '#FCFCFC',
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
-              borderRadius: 12,
+              shadowColor: 'black',
+              borderWidth: 1,
+              borderColor: '#DCDCDA',
+              shadowRadius: 10,
+              shadowOpacity: 0.1,
+              shadowOffset: {width: 0, height: 15} ,
             }}
             >
               <Icon
                 name='navicon'
                 size={14}
                 style={{
-                  flex: 0.1,
+                  flex: 0.15,
                   borderTopWidth: 1,
                   borderColor: 'white',
-                  backgroundColor: '#2B2D42',
-                  color: 'white',
+                  backgroundColor: '#FCFCFC',
+                  color: '#3F3F3F',
                   textAlign: 'center',
                   alignItems: 'center',
                 }}
               />
               <Swipeout
-                style={{ backgroundColor: 'red', flex: 0.9 }}
+                style={{ backgroundColor: '#DCD6F7', flex: 0.9}}
                 autoClose
                 close={this.state.swipeView}
                 right={[
@@ -127,9 +136,8 @@ class TimerView extends Component {
                         width: '100%',
                         height: '100%',
                         justifyContent: 'center',
-                        borderColor: '#50565B',
-                        borderBottomWidth: 2,
-                        borderLeftWidth: 2,
+                        borderColor: 'black',
+                        borderLeftWidth: 1,
                       }}
                       backgroundColor='#4D66A0'
                     >
@@ -146,8 +154,7 @@ class TimerView extends Component {
                         width: '100%',
                         height: '100%',
                         justifyContent: 'center',
-                        borderColor: '#50565B',
-                        borderBottomWidth: 2,
+                        borderColor: 'black',
                         borderLeftWidth: 2,
                       }}
                       backgroundColor='#4D66A0'
@@ -157,14 +164,14 @@ class TimerView extends Component {
                 ]}
               >
                 <TrackerContainer>
-                  <View style={{ flexDirection: 'row' }}>
+                  <View style={{ flexDirection: 'row', height: '100%' }}>
                     <TrackerLeftContainer onLayout={e => this.onLayout(e)}>
                       <TouchableHighlight
                       onPress = {() => {this.setState({modalVisible: true, currentTracker: row})}}
                       >
-                        <View>
-                          <View style={{alignItems:'center'}}>
-                          <Text>{row.name}</Text>
+                        <View style={{height: this.state.contentHeight / 10, padding: 2 }}>
+                          <View style={{alignItems:'center', marginTop: '1%'}}>
+                          <Text style={{fontSize: 18}}>{row.name}</Text>
                           <Text style={{ fontSize: 10 }}>
                             Do Something: {row.value} Goal Achieved: {row.value / row.dailyGoal * 100 }%
                           </Text>
@@ -185,9 +192,9 @@ class TimerView extends Component {
                         name='plus-circle'
                         onPress={() => (row.value / row.dailyGoal) >= 1 ? 0 : this.props.incrementTimer(row)}
                         borderRadius={0}
-                        iconStyle={{ marginRight: 0 }}
+                        iconStyle={{ marginRight: 0, color: '#3F3F3F' }}
                         style={{
-                          backgroundColor: '#2B2D42',
+                          backgroundColor: '#FCFCFC',
                           height: '100%',
                           justifyContent: 'center',
                         }}

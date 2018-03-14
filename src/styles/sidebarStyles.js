@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 
 export const SidebarStyles = StyleSheet.create({
   SidebarButton: {
-    backgroundColor: '#2B2D42',
+    backgroundColor: '#3F3F3F',
     justifyContent: 'flex-start',
     width: '100%',
     borderRadius: 0,
@@ -19,7 +19,8 @@ export const SidebarStyles = StyleSheet.create({
 
 export const SidebarContainer = styled.View`
   flex: 0.3;
-  background-color: #93B4D8;
+  height: 100%;
+  background-color: #FCFCFC;
   border-color: #50565B;
   shadow-color: black;
   shadow-radius: 10;

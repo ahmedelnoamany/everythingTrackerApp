@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import LinearGradient from 'react-native-linear-gradient';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
@@ -18,7 +17,6 @@ import UpdateTimer from './updateTimer';
 
 const Sidebar = props => (
   <SidebarContainer>
-    <LinearGradient colors={['#C5D5EA', '#91ADC2']}>
       {
         !props.newTimerToggled
       && !props.customTimerToggled
@@ -71,7 +69,6 @@ const Sidebar = props => (
           </SidebarContent>
         ))
       }
-    </LinearGradient>
   </SidebarContainer>
 );
 Sidebar.propTypes = {

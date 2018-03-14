@@ -15,7 +15,7 @@ const TrackerModal = props => (
     transparent
   >
     <View
-      style={{ flex: 1, backgroundColor: '#FEFFFE', marginTop: 80 }}
+      style={{ flex: 1, backgroundColor: 'black', marginTop: 80, borderTopLeftRadius: 25, borderTopRightRadius: 25 }}
     >
       <View style={{
         flex: 0.1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 5,

@@ -14,7 +14,7 @@ const store = configureStore();
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#C5D5EA',
+    backgroundColor: '#FCFCFC',
   },
 });
 
